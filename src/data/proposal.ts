@@ -200,7 +200,7 @@ export const marketEvidence: MarketEvidence[] = [
     description:
       'Corporate AI investment reached $252.3B in 2024. Private AI investment grew 44.5% year-over-year.',
     url:    'https://hai.stanford.edu/ai-index/2025-ai-index-report/economy',
-    refId:  7,
+    refId:  1,
   },
   {
     source:   'McKinsey State of AI',
@@ -211,7 +211,7 @@ export const marketEvidence: MarketEvidence[] = [
     description:
       'Of organizations report regular AI use in at least one function — yet only about one-third have begun scaling AI programs.',
     url:    'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai',
-    refId:  8,
+    refId:  2,
   },
   {
     source:   'BCG AI Radar 2025',
@@ -222,7 +222,7 @@ export const marketEvidence: MarketEvidence[] = [
     description:
       'Leading companies allocate more than 80% of AI investment to reshaping key functions and inventing new offerings.',
     url:    'https://www.bcg.com/publications/2025/closing-the-ai-impact-gap',
-    refId:  9,
+    refId:  3,
   },
 ]
 
@@ -270,7 +270,7 @@ export const roiCards: RoiCard[] = [
       'Design makes Lazer\'s technical depth and enterprise credibility visible. It is not decoration — it is the mechanism by which quality becomes legible to buyers.',
     workstream: 'Branding + Web Design',
     urls: ['https://www.businesswire.com/news/home/20181025005383/en/McKinsey-Company-Releases-World-First-Study-Quantifying-Financial'],
-    refIds: [10],
+    refIds: [4],
   },
   {
     id: 'b2b-self-serve',
@@ -286,7 +286,7 @@ export const roiCards: RoiCard[] = [
       'The website, case studies, and service pages must educate and qualify buyers before a sales conversation ever begins.',
     workstream: 'Website + Case Studies',
     urls: ['https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-sales-survey-finds-61-percent-of-b2b-buyers-prefer-a-rep-free-buying-experience'],
-    refIds: [11],
+    refIds: [5],
   },
   {
     id: 'shortlist-dynamics',
@@ -302,7 +302,7 @@ export const roiCards: RoiCard[] = [
       'Lazer must shape buyer preference before the first call. Brand, website, proof, and thought leadership build early consideration.',
     workstream: 'Brand + Website + Proof',
     urls: ['https://6sense.com/science-of-b2b/buyer-experience-report-2025/'],
-    refIds: [12],
+    refIds: [6],
   },
   {
     id: 'ai-sales-validation',
@@ -318,7 +318,7 @@ export const roiCards: RoiCard[] = [
       'Modular decks, one-pagers, and case studies give Lazer\'s team the right material to validate buyer thinking and move deals forward.',
     workstream: 'Decks + Sales Enablement',
     urls: ['https://www.gartner.com/en/newsroom/press-releases/2026-05-20-gartner-survey-finds-sixty-nine-percent-of-b-two-b-buyers-turn-to-sales-reps-to-validate-ai-generated-insights'],
-    refIds: [13],
+    refIds: [7],
   },
   {
     id: 'web-performance',
@@ -337,7 +337,7 @@ export const roiCards: RoiCard[] = [
       'https://support.google.com/adsense/answer/7450973',
       'https://web.dev/case-studies/vodafone',
     ],
-    refIds: [14, 15],
+    refIds: [8, 9],
   },
   {
     id: 'brand-consistency',
@@ -353,7 +353,7 @@ export const roiCards: RoiCard[] = [
       'One reusable system across website, decks, proposals, social, and launch assets reduces reinvention cost while building compounding authority.',
     workstream: 'Brand + Deck System',
     urls: ['https://www.marq.com/blog/measure-brand-enablement-roi/'],
-    refIds: [16],
+    refIds: [10],
   },
   {
     id: 'hidden-buyers',
@@ -369,7 +369,7 @@ export const roiCards: RoiCard[] = [
       'Founder posts, case studies, and launch assets reach hidden buyers and give champions better material to advocate internally.',
     workstream: 'Social + Content + Cases',
     urls: ['https://www.edelman.com/expertise/Business-Marketing/2025-b2b-thought-leadership-report'],
-    refIds: [17],
+    refIds: [11],
   },
 ]
 

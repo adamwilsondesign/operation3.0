@@ -204,7 +204,7 @@ export default function Timeline() {
 
         {/* Hover detail panel */}
         <SectionReveal delay={0.1}>
-          <div className="h-[112px] mb-10">
+          <div className="min-h-[112px] mb-10">
             {activePhase ? (
               <motion.div
                 key={activePhase.phase}

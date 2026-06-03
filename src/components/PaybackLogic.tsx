@@ -130,13 +130,15 @@ function SliderInput({
           {format(value)}
         </span>
       </div>
-      <div className="relative h-[3px] rounded-full bg-border-mid">
-        {/* Fill */}
-        <div
-          className="absolute inset-y-0 left-0 rounded-full bg-accent/60 transition-none"
-          style={{ width: `${pct}%` }}
-          aria-hidden="true"
-        />
+      <div className="relative flex items-center h-[18px]">
+        {/* Track background */}
+        <div className="absolute left-0 right-0 h-[3px] rounded-full bg-border-mid" aria-hidden="true">
+          {/* Fill */}
+          <div
+            className="absolute inset-y-0 left-0 rounded-full bg-accent/70 transition-none"
+            style={{ width: `${pct}%` }}
+          />
+        </div>
         <input
           type="range"
           min={min}
@@ -145,7 +147,7 @@ function SliderInput({
           value={value}
           onChange={e => onChange(Number(e.target.value))}
           aria-label={label}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          className="relative w-full"
         />
       </div>
     </div>
