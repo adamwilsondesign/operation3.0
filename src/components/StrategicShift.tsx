@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 import {
   marketShift,
@@ -6,36 +6,7 @@ import {
   type MarketEvidence,
 } from '../data/proposal'
 import { SectionReveal, StaggerReveal, RevealItem } from './ui'
-
-// ─── Count-up hook ────────────────────────────────────────────────────────────
-
-function useCountUp(
-  target: number,
-  decimals: number,
-  isInView: boolean,
-  reduced: boolean | null,
-): string {
-  const [val, setVal] = useState(0)
-
-  useEffect(() => {
-    if (reduced) { setVal(target); return }
-    if (!isInView) return
-
-    const DURATION = 1500
-    const start = performance.now()
-
-    const tick = (now: number) => {
-      const t = Math.min((now - start) / DURATION, 1)
-      const eased = 1 - Math.pow(1 - t, 3)
-      setVal(eased * target)
-      if (t < 1) requestAnimationFrame(tick)
-    }
-
-    requestAnimationFrame(tick)
-  }, [isInView, target, decimals, reduced])
-
-  return decimals > 0 ? val.toFixed(decimals) : String(Math.round(val))
-}
+import { useCountUp } from '../lib/useCountUp'
 
 // ─── Evidence card ────────────────────────────────────────────────────────────
 

@@ -199,6 +199,15 @@
 
   /* Tabular numbers for data */
   .tabular { font-variant-numeric: tabular-nums; }
+
+  /* Hide scrollbar while keeping scroll functionality */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* ─── Reduced Motion ─────────────────────────────────────────────────────── */

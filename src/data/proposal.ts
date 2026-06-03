@@ -46,6 +46,25 @@ export interface ProblemComparison {
   desired:  OutcomeItem[]
 }
 
+export interface RoiCard {
+  id: string
+  source: string
+  /** Displayed as-is when countTo is undefined */
+  stat: string
+  /** If set, the stat animates from 0 → countTo on scroll-in */
+  countTo?: number
+  prefix?: string
+  suffix?: string
+  decimals?: number
+  /** ≤ 2 sentences: what the data says */
+  metric: string
+  /** ≤ 2 sentences: why it matters for Lazer */
+  why: string
+  workstream: string
+  urls: string[]
+  refIds: number[]
+}
+
 export interface SystemPillar {
   number: string
   title: string
@@ -212,6 +231,126 @@ export const problemComparison: ProblemComparison = {
     { text: 'Easier to buy.' },
   ],
 }
+
+// ─── ROI Evidence Cards ───────────────────────────────────────────────────────
+
+export const roiCards: RoiCard[] = [
+  {
+    id: 'design-roi',
+    source: 'McKinsey & Company',
+    stat: '+32pp',
+    countTo: 32,
+    prefix: '+',
+    suffix: 'pp',
+    decimals: 0,
+    metric:
+      'Top-quartile design performers delivered 32 percentage points higher revenue growth and 56pp higher total shareholder return over five years versus peers.',
+    why:
+      'Design makes Lazer\'s technical depth and enterprise credibility visible. It is not decoration — it is the mechanism by which quality becomes legible to buyers.',
+    workstream: 'Branding + Web Design',
+    urls: ['https://www.businesswire.com/news/home/20181025005383/en/McKinsey-Company-Releases-World-First-Study-Quantifying-Financial'],
+    refIds: [10],
+  },
+  {
+    id: 'b2b-self-serve',
+    source: 'Gartner',
+    stat: '61%',
+    countTo: 61,
+    prefix: '',
+    suffix: '%',
+    decimals: 0,
+    metric:
+      '61% of B2B buyers prefer a rep-free buying experience. 73% actively avoid suppliers who send irrelevant outreach.',
+    why:
+      'The website, case studies, and service pages must educate and qualify buyers before a sales conversation ever begins.',
+    workstream: 'Website + Case Studies',
+    urls: ['https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-sales-survey-finds-61-percent-of-b2b-buyers-prefer-a-rep-free-buying-experience'],
+    refIds: [11],
+  },
+  {
+    id: 'shortlist-dynamics',
+    source: '6sense',
+    stat: '95%',
+    countTo: 95,
+    prefix: '',
+    suffix: '%',
+    decimals: 0,
+    metric:
+      'Winning vendors are on the buyer\'s Day One shortlist 95% of the time. The pre-contact favorite wins roughly 80% of deals.',
+    why:
+      'Lazer must shape buyer preference before the first call. Brand, website, proof, and thought leadership build early consideration.',
+    workstream: 'Brand + Website + Proof',
+    urls: ['https://6sense.com/science-of-b2b/buyer-experience-report-2025/'],
+    refIds: [12],
+  },
+  {
+    id: 'ai-sales-validation',
+    source: 'Gartner',
+    stat: '69%',
+    countTo: 69,
+    prefix: '',
+    suffix: '%',
+    decimals: 0,
+    metric:
+      '69% of B2B buyers turn to sales reps to validate AI-generated insights at key moments in the buying process.',
+    why:
+      'Modular decks, one-pagers, and case studies give Lazer\'s team the right material to validate buyer thinking and move deals forward.',
+    workstream: 'Decks + Sales Enablement',
+    urls: ['https://www.gartner.com/en/newsroom/press-releases/2026-05-20-gartner-survey-finds-sixty-nine-percent-of-b-two-b-buyers-turn-to-sales-reps-to-validate-ai-generated-insights'],
+    refIds: [13],
+  },
+  {
+    id: 'web-performance',
+    source: 'Google / Vodafone',
+    stat: '53%',
+    countTo: 53,
+    prefix: '',
+    suffix: '%',
+    decimals: 0,
+    metric:
+      '53% of visits are abandoned when load time exceeds 3 seconds. Vodafone\'s 31% LCP improvement drove 8% more sales and a 15% better lead rate.',
+    why:
+      'A slow or heavy site undermines the technical excellence Lazer is selling. Performance is brand.',
+    workstream: 'Web Design & Dev',
+    urls: [
+      'https://support.google.com/adsense/answer/7450973',
+      'https://web.dev/case-studies/vodafone',
+    ],
+    refIds: [14, 15],
+  },
+  {
+    id: 'brand-consistency',
+    source: 'Marq',
+    stat: '+20%',
+    countTo: 20,
+    prefix: '+',
+    suffix: '%',
+    decimals: 0,
+    metric:
+      'Strong brand consistency creates a 10–20% lift in top-line revenue, per Marq\'s brand enablement research.',
+    why:
+      'One reusable system across website, decks, proposals, social, and launch assets reduces reinvention cost while building compounding authority.',
+    workstream: 'Brand + Deck System',
+    urls: ['https://www.marq.com/blog/measure-brand-enablement-roi/'],
+    refIds: [16],
+  },
+  {
+    id: 'hidden-buyers',
+    source: 'Edelman × LinkedIn',
+    stat: '>40%',
+    countTo: 40,
+    prefix: '>',
+    suffix: '%',
+    decimals: 0,
+    metric:
+      'More than 40% of B2B deals stall due to internal misalignment — often driven by stakeholders the primary contact never meets.',
+    why:
+      'Founder posts, case studies, and launch assets reach hidden buyers and give champions better material to advocate internally.',
+    workstream: 'Social + Content + Cases',
+    urls: ['https://www.edelman.com/expertise/Business-Marketing/2025-b2b-thought-leadership-report'],
+    refIds: [17],
+  },
+]
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
@@ -491,5 +630,45 @@ export const references: Reference[] = [
     id: 9,
     citation:
       'Boston Consulting Group, AI Radar 2025: Closing the AI Impact Gap. Leading companies allocate >80% of AI investment toward reshaping key functions and building new offerings.',
+  },
+  {
+    id: 10,
+    citation:
+      'McKinsey & Company, "The Business Value of Design," 2018. Top-quartile design companies achieved 32pp higher revenue growth and 56pp higher total shareholder return versus peers over five years.',
+  },
+  {
+    id: 11,
+    citation:
+      'Gartner, Sales Survey, 2025. 61% of B2B buyers prefer a rep-free buying experience; 73% avoid suppliers who send irrelevant outreach.',
+  },
+  {
+    id: 12,
+    citation:
+      '6sense, 2025 Buyer Experience Report. Winning vendors appear on the buyer\'s Day One shortlist 95% of the time; the pre-contact preferred vendor wins approximately 80% of deals.',
+  },
+  {
+    id: 13,
+    citation:
+      'Gartner, Survey on B2B Buyer Behavior, 2026. 69% of B2B buyers turn to sales representatives to validate AI-generated insights at critical decision points.',
+  },
+  {
+    id: 14,
+    citation:
+      'Google, Think with Google, Web Performance Research. 53% of mobile visits are abandoned when page load time exceeds three seconds.',
+  },
+  {
+    id: 15,
+    citation:
+      'web.dev, Vodafone Case Study. A 31% improvement in Largest Contentful Paint drove an 8% increase in sales, 15% improvement in lead-to-visit rate, and 11% improvement in cart-to-visit rate.',
+  },
+  {
+    id: 16,
+    citation:
+      'Marq (formerly Lucidpress), Brand Enablement ROI Research. Organizations with consistent brand presentation report 10–20% top-line revenue lift.',
+  },
+  {
+    id: 17,
+    citation:
+      'Edelman × LinkedIn, 2025 B2B Thought Leadership Report. More than 40% of B2B deals stall due to internal stakeholder misalignment, often involving buyers outside the primary sales contact\'s network.',
   },
 ]
