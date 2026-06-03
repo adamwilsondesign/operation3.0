@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { totalBudget } from '../data/proposal'
 
 export default function RoiCalculator() {
   const [avgDeal, setAvgDeal] = useState(50000)
@@ -8,8 +9,7 @@ export default function RoiCalculator() {
 
   const monthlyRevenueLift = avgDeal * dealsPerMonth * (conversionLift / 100)
   const annualLift = monthlyRevenueLift * 12
-  const investment = 150000
-  const paybackMonths = investment / monthlyRevenueLift
+  const paybackMonths = totalBudget / monthlyRevenueLift
 
   const fmt = (n: number) =>
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n)

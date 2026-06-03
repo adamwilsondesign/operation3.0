@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
+import { projectMeta } from '../data/proposal'
 
 export default function Hero() {
+  const [thesisPart1, thesisPart2] = projectMeta.thesis.split('. ')
+
   return (
     <section
       id="hero"
@@ -41,7 +44,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="text-5xl sm:text-6xl lg:text-8xl font-black text-primary leading-[0.95] tracking-tight max-w-5xl"
         >
-          This is not a redesign.
+          {thesisPart1}.
         </motion.h1>
 
         <motion.h2
@@ -51,7 +54,7 @@ export default function Hero() {
           className="text-5xl sm:text-6xl lg:text-8xl font-black leading-[0.95] tracking-tight max-w-5xl mt-2"
           style={{ color: '#2563eb' }}
         >
-          It is revenue infrastructure.
+          {thesisPart2}.
         </motion.h2>
 
         <motion.p
@@ -60,7 +63,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
           className="mt-10 text-lg sm:text-xl text-secondary max-w-2xl leading-relaxed"
         >
-          A proposal for Lazer's brand evolution, website rebuild, and sales enablement system — built to compound, convert, and close.
+          {projectMeta.primaryMessage}
         </motion.p>
 
         <motion.div

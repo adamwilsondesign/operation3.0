@@ -56,7 +56,7 @@ export default function RoiEvidence({ onRefClick }: Props) {
                 value={m.value}
                 suffix={m.suffix}
                 label={m.label}
-                refId={m.ref}
+                refId={m.refId}
                 onRefClick={onRefClick}
               />
             </motion.div>

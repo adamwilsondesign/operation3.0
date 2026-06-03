@@ -1,15 +1,31 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { projectMeta, approvalModel, totalBudget } from '../data/proposal'
 
-const asks = [
-  { number: '01', ask: 'Approve the $150,000 investment', detail: 'Structured across 5 phases with milestone billing. No large upfront requirement.' },
-  { number: '02', ask: 'Assign an executive sponsor', detail: 'Single decision-maker with authority to unblock. 2–3 hours per month of their time.' },
-  { number: '03', ask: 'Authorize a Q3 kickoff', detail: 'Discovery begins within 2 weeks of approval. Full launch in 22 weeks.' },
-]
+const fmt = (n: number) =>
+  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(n)
 
 export default function ExecutiveAsk() {
   const ref = useRef<HTMLElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-10%' })
+
+  const asks = [
+    {
+      number: '01',
+      ask: `Approve the ${fmt(totalBudget)} investment`,
+      detail: `Four fully-scoped buckets with milestone-based billing. Delivers in ${projectMeta.timelineMonths} months.`,
+    },
+    {
+      number: '02',
+      ask: `Assign the executive sponsor`,
+      detail: `${approvalModel.executiveSponsor} leads day-to-day with the creative director. ${approvalModel.founders.join(', ')} hold final approval.`,
+    },
+    {
+      number: '03',
+      ask: 'Authorize immediate kickoff',
+      detail: `Discovery begins within one week of approval. ${approvalModel.workingModel}.`,
+    },
+  ]
 
   return (
     <section
