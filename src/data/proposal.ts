@@ -110,7 +110,9 @@ export interface TimelinePhase {
 
 export interface Reference {
   id: number
+  source: string
   citation: string
+  url: string
 }
 
 export interface ApprovalModel {
@@ -795,87 +797,68 @@ export const approvalModel: ApprovalModel = {
 export const references: Reference[] = [
   {
     id: 1,
-    citation:
-      'Demand Gen Report, B2B Buyer Behavior Study, 2023. "67% of the buyer\'s journey is now done digitally before engaging a sales rep."',
+    source: 'Stanford HAI — AI Index 2025',
+    citation: 'Stanford University Human-Centered AI, AI Index Report 2025 — Economy Chapter. Corporate AI investment reached $252.3B globally in 2024; private AI investment grew 44.5% year-over-year.',
+    url: 'https://hai.stanford.edu/ai-index/2025-ai-index-report/economy',
   },
   {
     id: 2,
-    citation:
-      'Forrester Research, "The Business Impact of Digital Experience," 2023. Companies with superior digital presence generate 3x more qualified pipeline.',
+    source: 'McKinsey — State of AI 2025',
+    citation: 'McKinsey & Company, The State of AI 2025. 78% of organizations now use AI in at least one business function, up from 55% a year prior; only ~one-third have begun scaling enterprise-wide.',
+    url: 'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai',
   },
   {
     id: 3,
-    citation:
-      'HubSpot State of Inbound Sales Report, 2024. Self-educated buyers close 47% more often and require fewer touchpoints.',
+    source: 'BCG — AI Radar 2025',
+    citation: 'Boston Consulting Group, AI Radar 2025: Closing the AI Impact Gap. Leading companies allocate >80% of AI investment toward reshaping key functions and building new offerings — not just automating existing ones.',
+    url: 'https://www.bcg.com/publications/2025/closing-the-ai-impact-gap',
   },
   {
     id: 4,
-    citation:
-      'Gartner, Sales Enablement Technology Market Guide, 2024. Organizations with mature sales enablement achieve 2.3x faster deal cycles.',
+    source: 'McKinsey — Business Value of Design',
+    citation: 'McKinsey & Company, "The Business Value of Design," 2018. Top-quartile design companies achieved 32pp higher revenue growth and 56pp higher total shareholder return versus industry peers over five years.',
+    url: 'https://www.businesswire.com/news/home/20181025005383/en/McKinsey-Company-Releases-World-First-Study-Quantifying-Financial',
   },
   {
     id: 5,
-    citation:
-      'McKinsey & Company, "The B2B digital inflection point," 2024. Digital-first B2B companies grow revenue 5x faster than peers.',
+    source: 'Gartner — B2B Rep-Free Buying',
+    citation: 'Gartner Sales Survey, 2025. 61% of B2B buyers prefer a rep-free buying experience; 73% avoid suppliers who send irrelevant outreach or fail to demonstrate understanding of their business.',
+    url: 'https://www.gartner.com/en/newsroom/press-releases/2025-06-25-gartner-sales-survey-finds-61-percent-of-b2b-buyers-prefer-a-rep-free-buying-experience',
   },
   {
     id: 6,
-    citation:
-      'Nielsen Norman Group, Website UX & Credibility Study, 2023. First impressions form in 50ms; 75% of credibility judgments are design-based.',
+    source: '6sense — 2025 Buyer Experience Report',
+    citation: '6sense, 2025 Buyer Experience Report. Winning vendors appear on the buyer\'s Day One shortlist 95% of the time; the pre-contact preferred vendor wins approximately 80% of deals.',
+    url: 'https://6sense.com/science-of-b2b/buyer-experience-report-2025/',
   },
   {
     id: 7,
-    citation:
-      'Stanford University Human-Centered AI, AI Index Report 2025. Corporate AI investment reached $252.3B globally in 2024; private AI investment grew 44.5% year-over-year.',
+    source: 'Gartner — AI-Generated Insights Validation',
+    citation: 'Gartner Survey, 2026. 69% of B2B buyers turn to sales representatives to validate AI-generated insights at critical decision points — raising the bar for sales credibility and preparedness.',
+    url: 'https://www.gartner.com/en/newsroom/press-releases/2026-05-20-gartner-survey-finds-sixty-nine-percent-of-b-two-b-buyers-turn-to-sales-reps-to-validate-ai-generated-insights',
   },
   {
     id: 8,
-    citation:
-      'McKinsey & Company, The State of AI 2024. 88% of organizations report regular AI use in at least one business function; only ~one-third have begun scaling AI programs enterprise-wide.',
+    source: 'Google — Page Speed Abandonment',
+    citation: 'Google AdSense Help / Think with Google. 53% of mobile visits are abandoned when page load time exceeds three seconds; each additional second of load time reduces conversions by up to 20%.',
+    url: 'https://support.google.com/adsense/answer/7450973',
   },
   {
     id: 9,
-    citation:
-      'Boston Consulting Group, AI Radar 2025: Closing the AI Impact Gap. Leading companies allocate >80% of AI investment toward reshaping key functions and building new offerings.',
+    source: 'web.dev — Vodafone Core Web Vitals',
+    citation: 'web.dev, Vodafone Core Web Vitals Case Study. A 31% improvement in Largest Contentful Paint drove an 8% increase in sales, 15% improvement in lead-to-visit rate, and 11% improvement in cart-to-visit rate.',
+    url: 'https://web.dev/case-studies/vodafone',
   },
   {
     id: 10,
-    citation:
-      'McKinsey & Company, "The Business Value of Design," 2018. Top-quartile design companies achieved 32pp higher revenue growth and 56pp higher total shareholder return versus peers over five years.',
+    source: 'Marq — Brand Consistency ROI',
+    citation: 'Marq (formerly Lucidpress), Brand Enablement ROI Research. Organizations with consistent brand presentation across all channels report 10–20% top-line revenue lift versus inconsistently branded peers.',
+    url: 'https://www.marq.com/blog/measure-brand-enablement-roi/',
   },
   {
     id: 11,
-    citation:
-      'Gartner, Sales Survey, 2025. 61% of B2B buyers prefer a rep-free buying experience; 73% avoid suppliers who send irrelevant outreach.',
-  },
-  {
-    id: 12,
-    citation:
-      '6sense, 2025 Buyer Experience Report. Winning vendors appear on the buyer\'s Day One shortlist 95% of the time; the pre-contact preferred vendor wins approximately 80% of deals.',
-  },
-  {
-    id: 13,
-    citation:
-      'Gartner, Survey on B2B Buyer Behavior, 2026. 69% of B2B buyers turn to sales representatives to validate AI-generated insights at critical decision points.',
-  },
-  {
-    id: 14,
-    citation:
-      'Google, Think with Google, Web Performance Research. 53% of mobile visits are abandoned when page load time exceeds three seconds.',
-  },
-  {
-    id: 15,
-    citation:
-      'web.dev, Vodafone Case Study. A 31% improvement in Largest Contentful Paint drove an 8% increase in sales, 15% improvement in lead-to-visit rate, and 11% improvement in cart-to-visit rate.',
-  },
-  {
-    id: 16,
-    citation:
-      'Marq (formerly Lucidpress), Brand Enablement ROI Research. Organizations with consistent brand presentation report 10–20% top-line revenue lift.',
-  },
-  {
-    id: 17,
-    citation:
-      'Edelman × LinkedIn, 2025 B2B Thought Leadership Report. More than 40% of B2B deals stall due to internal stakeholder misalignment, often involving buyers outside the primary sales contact\'s network.',
+    source: 'Edelman × LinkedIn — B2B Thought Leadership',
+    citation: 'Edelman × LinkedIn, 2025 B2B Thought Leadership Impact Report. More than 40% of B2B deals stall due to internal stakeholder misalignment — often involving buyers outside the primary sales contact\'s network.',
+    url: 'https://www.edelman.com/expertise/Business-Marketing/2025-b2b-thought-leadership-report',
   },
 ]

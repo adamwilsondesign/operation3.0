@@ -22,6 +22,11 @@ export default function App() {
     setRefsOpen(true)
   }, [])
 
+  const openRefs = useCallback(() => {
+    setHighlightRef(undefined)
+    setRefsOpen(true)
+  }, [])
+
   const closeRefs = useCallback(() => {
     setRefsOpen(false)
     setHighlightRef(undefined)
@@ -61,6 +66,7 @@ export default function App() {
       <footer className="relative z-10">
         <References
           isOpen={refsOpen}
+          onOpen={openRefs}
           onClose={closeRefs}
           highlightId={highlightRef}
         />

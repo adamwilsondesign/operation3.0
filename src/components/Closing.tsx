@@ -1,83 +1,173 @@
-import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
+import { projectMeta, totalBudget } from '../data/proposal'
+import { SectionReveal } from './ui'
+
+const fmt = (n: number) =>
+  new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(n)
+
+const EASE = [0.16, 1, 0.3, 1] as const
 
 export default function Closing() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-10%' })
+  const reduced = useReducedMotion()
+  const glowRef = useRef<HTMLDivElement>(null)
+  const glowInView = useInView(glowRef, { once: true, margin: '-5%' })
 
   return (
     <section
       id="closing"
-      ref={ref}
-      className="relative py-32 lg:py-48 px-6 lg:px-8 border-t border-border overflow-hidden"
-      aria-label="Closing statement"
+      className="relative py-32 lg:py-48 border-t border-border overflow-hidden bg-surface"
+      aria-labelledby="closing-headline"
     >
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: `linear-gradient(#2563eb 1px, transparent 1px), linear-gradient(90deg, #2563eb 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] opacity-[0.05] pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse, #2563eb 0%, transparent 70%)' }}
-        aria-hidden="true"
-      />
-
-      <div className="relative max-w-7xl mx-auto text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-8"
-        >
-          The bottom line
-        </motion.p>
-
-        <motion.h2
-          initial={{ opacity: 0, y: 32 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-4xl sm:text-5xl lg:text-7xl font-black text-primary leading-[0.95] tracking-tight max-w-5xl mx-auto"
-        >
-          The companies that win the next decade are building{' '}
-          <span className="text-accent">infrastructure</span> today.
-        </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-8 text-secondary text-lg max-w-2xl mx-auto leading-relaxed"
-        >
-          The opportunity cost of waiting is not zero. Every quarter without this system is a quarter of pipeline that went somewhere else.
-        </motion.p>
-
+      {/* Background glow */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.45 }}
-          className="mt-12 flex flex-wrap justify-center gap-4"
-        >
-          <a
-            href="#ask"
-            className="inline-flex items-center gap-2 bg-accent text-white text-sm font-semibold px-8 py-4 rounded-sm hover:bg-accent-light transition-colors duration-200"
-          >
-            Review the ask
-            <span aria-hidden="true">→</span>
-          </a>
-        </motion.div>
+          ref={glowRef}
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full"
+          style={{
+            background: 'radial-gradient(ellipse at center, rgba(37,99,235,0.12) 0%, transparent 70%)',
+            filter: 'blur(40px)',
+          }}
+          initial={reduced ? false : { opacity: 0, scale: 0.7 }}
+          animate={glowInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 1.8, ease: EASE }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-0 right-0 h-[1px]"
+          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.15) 50%, transparent 100%)' }}
+          initial={reduced ? false : { scaleX: 0 }}
+          animate={glowInView ? { scaleX: 1 } : {}}
+          transition={{ duration: 1.4, delay: 0.3, ease: EASE }}
+        />
+      </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 text-secondary/40 text-xs"
-        >
-          Prepared by Lazer Technologies — Confidential — {new Date().getFullYear()}
-        </motion.p>
+      <div className="section-container relative">
+
+        <SectionReveal>
+          <p className="eyebrow mb-8 text-center">The Bottom Line</p>
+        </SectionReveal>
+
+        <SectionReveal delay={0.08}>
+          <h2
+            id="closing-headline"
+            className="
+              text-display-2xl font-black text-primary
+              tracking-editorial leading-[0.92]
+              text-center mx-auto
+              max-w-[18ch]
+              mb-8
+            "
+          >
+            We are not buying<br className="hidden sm:block" /> a new look.
+          </h2>
+        </SectionReveal>
+
+        <SectionReveal delay={0.16}>
+          <p className="
+            text-[19px] lg:text-[22px] font-light text-primary
+            leading-[1.5] tracking-tight
+            text-center mx-auto max-w-[40ch]
+            mb-6
+          ">
+            We are building the system that makes Lazer easier to understand, easier to trust, and easier to buy.
+          </p>
+        </SectionReveal>
+
+        <SectionReveal delay={0.22}>
+          <p className="
+            text-[15px] text-secondary leading-[1.65]
+            text-center mx-auto max-w-[44ch]
+            mb-16
+          ">
+            For the next phase of the business, this is not a marketing expense. It is a growth asset.
+          </p>
+        </SectionReveal>
+
+        {/* CTAs */}
+        <SectionReveal delay={0.28}>
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-20">
+            <a
+              href="#ask"
+              className="
+                inline-flex items-center gap-2
+                bg-accent text-white
+                text-[12px] font-semibold tracking-[0.1em] uppercase
+                px-6 py-3 rounded-[3px]
+                hover:bg-accent-light transition-colors duration-200
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface
+              "
+            >
+              Approve V1 scope
+              <span aria-hidden="true">→</span>
+            </a>
+            <a
+              href="#budget"
+              className="
+                inline-flex items-center gap-2
+                border border-border-mid text-secondary
+                text-[12px] font-semibold tracking-[0.1em] uppercase
+                px-6 py-3 rounded-[3px]
+                hover:border-border-light hover:text-primary transition-colors duration-200
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface
+              "
+            >
+              View budget
+            </a>
+            <a
+              href="#references"
+              className="
+                inline-flex items-center gap-2
+                border border-border-mid text-secondary
+                text-[12px] font-semibold tracking-[0.1em] uppercase
+                px-6 py-3 rounded-[3px]
+                hover:border-border-light hover:text-primary transition-colors duration-200
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface
+              "
+            >
+              View references
+            </a>
+          </div>
+        </SectionReveal>
+
+        {/* Summary card */}
+        <SectionReveal delay={0.32}>
+          <div className="card-accent p-8 lg:p-10 max-w-2xl mx-auto">
+            <p className="text-[9px] font-semibold tracking-[0.25em] uppercase text-accent/60 mb-6 text-center">
+              {projectMeta.title}
+            </p>
+            <div className="grid grid-cols-3 divide-x divide-accent/15">
+              <div className="pr-6 lg:pr-8 text-center">
+                <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Investment</p>
+                <p className="text-[22px] lg:text-[26px] font-mono font-black text-primary tabular leading-none">
+                  {fmt(totalBudget)}
+                </p>
+              </div>
+              <div className="px-6 lg:px-8 text-center">
+                <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Timeline</p>
+                <p className="text-[22px] lg:text-[26px] font-mono font-black text-primary tabular leading-none">
+                  {projectMeta.timelineMonths}mo
+                </p>
+              </div>
+              <div className="pl-6 lg:pl-8 text-center">
+                <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Scope</p>
+                <p className="text-[13px] font-semibold text-primary leading-snug">
+                  System V1
+                </p>
+              </div>
+            </div>
+          </div>
+        </SectionReveal>
+
+        <SectionReveal delay={0.1}>
+          <p className="text-center text-[10px] font-mono text-tertiary/40 mt-16 tracking-wide">
+            Lazer Technologies — Confidential — {new Date().getFullYear()}
+          </p>
+        </SectionReveal>
+
       </div>
     </section>
   )
