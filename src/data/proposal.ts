@@ -76,6 +76,19 @@ export interface ScopeItem {
   deliverables: string[]
 }
 
+export interface SystemNode {
+  id: string
+  number: string
+  title: string
+  workstream: string
+  description: string
+  includes: string[]
+  returns: string[]
+  /** Grid position: [col, row] (1-indexed) for desktop layout */
+  col: number
+  row: number
+}
+
 export interface BudgetBucket {
   label: string
   amount: number
@@ -451,6 +464,128 @@ export const systemPillars: SystemPillar[] = [
       '~12 service one-pagers',
       'Social & launch templates',
     ],
+  },
+]
+
+// ─── System Nodes (interactive scope map) ────────────────────────────────────
+
+export const systemNodes: SystemNode[] = [
+  {
+    id: 'brand',
+    number: '01',
+    title: 'Brand System',
+    workstream: 'Branding',
+    description: 'Visual identity evolution — everything except the logo.',
+    includes: [
+      'Brand guidelines & design tokens',
+      'Typography & color system',
+      'Iconography direction',
+      'Asset library',
+    ],
+    returns: [
+      'Consistent visual language across every touchpoint',
+      'Faster production — designers pull from a shared system',
+      'Credibility signal for enterprise buyers',
+    ],
+    col: 1,
+    row: 1,
+  },
+  {
+    id: 'website',
+    number: '02',
+    title: 'Website Rebuild',
+    workstream: 'Web Design',
+    description: 'A complete Webflow rebuild — designed to sell, not just describe.',
+    includes: [
+      'New information architecture',
+      'Full Webflow design & development',
+      'CMS, QA, and launch',
+      'SEO & performance foundation',
+    ],
+    returns: [
+      'Converts first-time visitors into qualified conversations',
+      'Positions Lazer as the premium option before a meeting happens',
+      'SEO foundation that compounds over time',
+    ],
+    col: 2,
+    row: 1,
+  },
+  {
+    id: 'casestudies',
+    number: '03',
+    title: 'Case Study Engine',
+    workstream: 'Web Copy',
+    description: '20+ structured case studies that prove outcomes, not just work.',
+    includes: [
+      '20+ case study write-ups',
+      'Structured proof framework (challenge / approach / result)',
+      'CMS templates for ongoing publishing',
+    ],
+    returns: [
+      'Gives sales a proof library for every objection',
+      'Search-discoverable evidence of expertise',
+      'Reduces time-to-trust in the sales cycle',
+    ],
+    col: 3,
+    row: 1,
+  },
+  {
+    id: 'enablement',
+    number: '04',
+    title: 'Sales Enablement',
+    workstream: 'Deck Templates',
+    description: 'A modular deck system that arms every seller with the right narrative.',
+    includes: [
+      'General Lazer + AI + Fintech + Commerce + Design decks',
+      'Master modular deck template',
+      'Pitch, proposal, discovery & SOW templates',
+      '~12 service one-pagers',
+    ],
+    returns: [
+      'Reps walk in with a polished story — every time',
+      'Proposal production time drops from days to hours',
+      'Consistent narrative across a distributed team',
+    ],
+    col: 1,
+    row: 2,
+  },
+  {
+    id: 'social',
+    number: '05',
+    title: 'Social & Launch Kit',
+    workstream: 'Branding',
+    description: 'Templates and assets to announce work, recruit talent, and stay visible.',
+    includes: [
+      'Social media templates (LinkedIn, Instagram)',
+      'Launch announcement formats',
+      'Recruitment and culture assets',
+    ],
+    returns: [
+      'Team can ship polished content without a designer',
+      'Consistent brand presence across channels',
+      'Launch moments that drive awareness and inbound',
+    ],
+    col: 2,
+    row: 2,
+  },
+  {
+    id: 'measurement',
+    number: '06',
+    title: 'Measurement',
+    workstream: 'Web Design',
+    description: 'Analytics foundation so every decision is backed by data from day one.',
+    includes: [
+      'GA4 setup and event tracking',
+      'Conversion goal configuration',
+      'Dashboard for traffic, leads, and content performance',
+    ],
+    returns: [
+      'Know exactly which content converts visitors',
+      'Attribute revenue to specific pages and campaigns',
+      'Continuous improvement loop built in from launch',
+    ],
+    col: 3,
+    row: 2,
   },
 ]
 
