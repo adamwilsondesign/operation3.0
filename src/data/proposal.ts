@@ -90,9 +90,12 @@ export interface SystemNode {
 }
 
 export interface BudgetBucket {
+  id: string
   label: string
   amount: number
   description: string
+  includes: string[]
+  returns: string
 }
 
 export interface TimelinePhase {
@@ -625,24 +628,62 @@ export const scopeItems: ScopeItem[] = [
 
 export const budgetBuckets: BudgetBucket[] = [
   {
+    id: 'web-design',
     label: 'Web Design & Development',
     amount: 25000,
     description: 'Full Webflow rebuild — IA, UX, visual design, development, CMS, QA, and launch.',
+    includes: [
+      'Full Webflow rebuild',
+      'UX/UI design',
+      'Responsive design',
+      'CMS templates',
+      'Performance optimization',
+      'Launch QA',
+      'Conversion paths for "message us" and "request a deck"',
+    ],
+    returns: 'Turns the website into a sharper buyer education, credibility, and conversion engine.',
   },
   {
+    id: 'web-copy',
     label: 'Web Copy & Case Studies',
     amount: 10000,
     description: '20+ case studies, homepage and service copy, and SEO foundations.',
+    includes: [
+      'Website copy',
+      'Service-line messaging',
+      'Proof hierarchy',
+      'Case study system',
+      '20+ refreshed or rebuilt case studies',
+    ],
+    returns: 'Makes Lazer\'s value easier to understand, lowers buyer uncertainty, and gives sales stronger proof.',
   },
   {
+    id: 'branding',
     label: 'Branding',
     amount: 20000,
     description: 'Brand evolution, design system, guidelines, and asset library.',
+    includes: [
+      'Brand evolution around the existing logo',
+      'Visual identity system',
+      'Typography, color, layout, and graphic language',
+      'Line-of-business visual expressions',
+      'Brand guidelines',
+      'Messaging guidelines',
+    ],
+    returns: 'Improves enterprise perception, creates consistency across every touchpoint, and gives the company a scalable creative system.',
   },
   {
+    id: 'decks',
     label: 'Deck Templates',
     amount: 5000,
     description: 'Master modular deck, 5 focus-area decks, pitch/proposal/SOW templates, and one-pagers.',
+    includes: [
+      'General Lazer, AI, Fintech, Commerce, and Design decks',
+      'Master modular deck template',
+      'Pitch, proposal, discovery, and SOW templates',
+      'Reusable slide components',
+    ],
+    returns: 'Gives founders, salespeople, and partners a faster, sharper, more consistent way to sell.',
   },
 ]
 
