@@ -17,6 +17,35 @@ export interface Problem {
   body: string
 }
 
+export interface MarketShift {
+  headline: string
+  narrative: string
+  positioning: string
+  focus: string[]
+  focusNote: string
+}
+
+export interface MarketEvidence {
+  source: string
+  countTo: number
+  prefix: string
+  suffix: string
+  decimals: number
+  description: string
+  url: string
+  refId: number
+}
+
+export interface FrictionItem  { text: string }
+export interface OutcomeItem   { text: string }
+
+export interface ProblemComparison {
+  headline: string
+  framing: string
+  friction: FrictionItem[]
+  desired:  OutcomeItem[]
+}
+
 export interface SystemPillar {
   number: string
   title: string
@@ -106,6 +135,83 @@ export const heroChips: HeroChip[] = [
   { kind: 'tag',  text: 'Full Webflow rebuild' },
   { kind: 'tag',  text: 'Brand evolution — logo stays' },
 ]
+
+// ─── Market Shift ─────────────────────────────────────────────────────────────
+
+export const marketShift: MarketShift = {
+  headline:
+    'The market has moved toward Lazer\'s strongest wedge.',
+  narrative:
+    'AI demand is no longer speculative. Companies are using AI, but most have not scaled it. Lazer\'s opportunity is to become the partner that helps enterprise teams move from AI ambition to shipped products, workflows, and platforms.',
+  positioning:
+    'Lazer is the AI-native product, design, and engineering partner for companies ready to move from ambition to production.',
+  focus: ['AI', 'Commerce', 'Design'],
+  focusNote:
+    'Fintech supports the AI sales story · Crypto / Web3 deprioritized · Anything outside AI, Commerce, and Design is cut from core market emphasis.',
+}
+
+export const marketEvidence: MarketEvidence[] = [
+  {
+    source:   'Stanford AI Index 2025',
+    countTo:  252.3,
+    prefix:   '$',
+    suffix:   'B',
+    decimals: 1,
+    description:
+      'Corporate AI investment reached $252.3B in 2024. Private AI investment grew 44.5% year-over-year.',
+    url:    'https://hai.stanford.edu/ai-index/2025-ai-index-report/economy',
+    refId:  7,
+  },
+  {
+    source:   'McKinsey State of AI',
+    countTo:  88,
+    prefix:   '',
+    suffix:   '%',
+    decimals: 0,
+    description:
+      'Of organizations report regular AI use in at least one function — yet only about one-third have begun scaling AI programs.',
+    url:    'https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai',
+    refId:  8,
+  },
+  {
+    source:   'BCG AI Radar 2025',
+    countTo:  80,
+    prefix:   '>',
+    suffix:   '%',
+    decimals: 0,
+    description:
+      'Leading companies allocate more than 80% of AI investment to reshaping key functions and inventing new offerings.',
+    url:    'https://www.bcg.com/publications/2025/closing-the-ai-impact-gap',
+    refId:  9,
+  },
+]
+
+// ─── Problem Comparison ───────────────────────────────────────────────────────
+
+export const problemComparison: ProblemComparison = {
+  headline: 'Lazer has the proof. The system is not making it obvious fast enough.',
+  framing:
+    'Seven friction points create a systematic gap between Lazer\'s actual capability and how the market perceives and buys it.',
+  friction: [
+    { text: 'Brand perception does not match business ambition.' },
+    { text: 'Current brand feels dated and associated with an older Web3-era aesthetic.' },
+    { text: 'Service lines need clearer packaging.' },
+    { text: 'Sales materials are fragmented — rebuilt per deal.' },
+    { text: 'Case studies are underleveraged and hard to navigate.' },
+    { text: 'Website needs to qualify and convert before sales gets involved.' },
+    { text: 'The story does not yet make AI, engineering, commerce, and design feel as sharp as the work.' },
+  ],
+  desired: [
+    { text: 'More AI-native.' },
+    { text: 'More technical.' },
+    { text: 'More enterprise-ready.' },
+    { text: 'More design-forward.' },
+    { text: 'More mature and focused.' },
+    { text: 'Easier to understand.' },
+    { text: 'Easier to trust.' },
+    { text: 'Easier to buy.' },
+  ],
+}
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
@@ -370,5 +476,20 @@ export const references: Reference[] = [
     id: 6,
     citation:
       'Nielsen Norman Group, Website UX & Credibility Study, 2023. First impressions form in 50ms; 75% of credibility judgments are design-based.',
+  },
+  {
+    id: 7,
+    citation:
+      'Stanford University Human-Centered AI, AI Index Report 2025. Corporate AI investment reached $252.3B globally in 2024; private AI investment grew 44.5% year-over-year.',
+  },
+  {
+    id: 8,
+    citation:
+      'McKinsey & Company, The State of AI 2024. 88% of organizations report regular AI use in at least one business function; only ~one-third have begun scaling AI programs enterprise-wide.',
+  },
+  {
+    id: 9,
+    citation:
+      'Boston Consulting Group, AI Radar 2025: Closing the AI Impact Gap. Leading companies allocate >80% of AI investment toward reshaping key functions and building new offerings.',
   },
 ]

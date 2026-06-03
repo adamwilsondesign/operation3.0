@@ -1,89 +1,200 @@
-import { motion } from 'framer-motion'
-import { useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import { useInView, useReducedMotion } from 'framer-motion'
+import {
+  marketShift,
+  marketEvidence,
+  type MarketEvidence,
+} from '../data/proposal'
+import { SectionReveal, StaggerReveal, RevealItem } from './ui'
 
-const before = [
-  'A website that describes services',
-  'Sales materials rebuilt per deal',
-  'Brand applied inconsistently',
-  'Expertise invisible to prospects',
-  'Growth dependent on relationships alone',
-]
+// ─── Count-up hook ────────────────────────────────────────────────────────────
 
-const after = [
-  'A system that sells while you sleep',
-  'Sales infrastructure that compounds',
-  'Brand that builds authority at scale',
-  'Expertise legible from the first impression',
-  'Pipeline from digital, not just referrals',
-]
+function useCountUp(
+  target: number,
+  decimals: number,
+  isInView: boolean,
+  reduced: boolean | null,
+): string {
+  const [val, setVal] = useState(0)
+
+  useEffect(() => {
+    if (reduced) { setVal(target); return }
+    if (!isInView) return
+
+    const DURATION = 1500
+    const start = performance.now()
+
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / DURATION, 1)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setVal(eased * target)
+      if (t < 1) requestAnimationFrame(tick)
+    }
+
+    requestAnimationFrame(tick)
+  }, [isInView, target, decimals, reduced])
+
+  return decimals > 0 ? val.toFixed(decimals) : String(Math.round(val))
+}
+
+// ─── Evidence card ────────────────────────────────────────────────────────────
+
+function EvidenceCard({
+  card,
+  reduced,
+}: {
+  card: MarketEvidence
+  reduced: boolean | null
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-5%' })
+  const display = useCountUp(card.countTo, card.decimals, isInView, reduced)
+
+  // Parse domain for a clean URL label
+  let domain = card.url
+  try { domain = new URL(card.url).hostname.replace('www.', '') } catch {}
+
+  return (
+    <article
+      ref={ref}
+      className="card-elevated p-7 lg:p-8 flex flex-col gap-5 h-full group"
+    >
+      {/* Source */}
+      <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-tertiary">
+        {card.source}
+      </p>
+
+      {/* Big animated stat */}
+      <div className="flex items-baseline gap-0 font-mono font-black text-primary leading-none select-none">
+        {card.prefix && (
+          <span className="text-[2rem] lg:text-[2.5rem] text-accent/80">{card.prefix}</span>
+        )}
+        <span
+          className="tabular"
+          style={{ fontSize: 'clamp(2.5rem, 4.5vw, 3.75rem)' }}
+        >
+          {display}
+        </span>
+        <span className="text-[2rem] lg:text-[2.5rem] text-accent/80">{card.suffix}</span>
+      </div>
+
+      {/* Description */}
+      <p className="text-[13px] text-secondary leading-[1.65] flex-1">
+        {card.description}
+      </p>
+
+      {/* Source link */}
+      <a
+        href={card.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="
+          inline-flex items-center gap-1.5
+          text-[10px] font-mono text-tertiary
+          hover:text-accent transition-colors duration-250
+          mt-auto
+        "
+        aria-label={`Source: ${card.source}`}
+      >
+        {domain}
+        <span aria-hidden="true">↗</span>
+      </a>
+    </article>
+  )
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export default function StrategicShift() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, margin: '-15%' })
+  const reduced = useReducedMotion()
 
   return (
     <section
       id="market"
-      ref={ref}
-      className="py-24 lg:py-32 px-6 lg:px-8 border-t border-border"
-      aria-label="Strategic shift"
+      className="py-28 lg:py-36 border-t border-border bg-surface"
+      aria-labelledby="market-headline"
     >
-      <div className="max-w-7xl mx-auto">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-accent text-xs font-semibold tracking-[0.2em] uppercase mb-4"
-        >
-          The Shift
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.05 }}
-          className="text-3xl sm:text-4xl lg:text-5xl font-black text-primary tracking-tight mb-16"
-        >
-          From presence to performance.
-        </motion.h2>
+      <div className="section-container">
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Before */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="p-8 border border-border rounded-sm"
-          >
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-secondary mb-6">Current State</p>
-            <ul className="space-y-4" role="list">
-              {before.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-secondary text-sm leading-relaxed">
-                  <span className="w-4 h-4 mt-0.5 flex-shrink-0 text-secondary/40">—</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+        {/* Header */}
+        <SectionReveal>
+          <p className="eyebrow mb-5">The Opportunity</p>
+        </SectionReveal>
 
-          {/* After */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="p-8 border border-accent/30 rounded-sm accent-glow bg-accent/5"
+        <SectionReveal delay={0.08}>
+          <h2
+            id="market-headline"
+            className="
+              text-display-lg font-black text-primary
+              tracking-editorial leading-editorial
+              max-w-[22ch] mb-8
+            "
           >
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-6">Target State</p>
-            <ul className="space-y-4" role="list">
-              {after.map((item, i) => (
-                <li key={i} className="flex items-start gap-3 text-primary text-sm leading-relaxed">
-                  <span className="w-4 h-4 mt-0.5 flex-shrink-0 text-accent font-bold">+</span>
-                  {item}
-                </li>
+            {marketShift.headline}
+          </h2>
+        </SectionReveal>
+
+        <SectionReveal delay={0.15}>
+          <p className="text-[16px] text-secondary leading-[1.65] max-w-[58ch] mb-14">
+            {marketShift.narrative}
+          </p>
+        </SectionReveal>
+
+        {/* Positioning statement — editorial pull-quote */}
+        <SectionReveal delay={0.22}>
+          <div className="border-l-2 border-accent pl-8 py-1 mb-12">
+            <p className="text-[21px] font-light text-primary leading-[1.5] max-w-[44ch] tracking-tight">
+              {marketShift.positioning}
+            </p>
+          </div>
+        </SectionReveal>
+
+        {/* Strategic focus pills */}
+        <SectionReveal delay={0.28}>
+          <div className="mb-16">
+            <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-tertiary mb-3">
+              Strategic Focus
+            </p>
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              {marketShift.focus.map(f => (
+                <span
+                  key={f}
+                  className="
+                    px-3 py-1.5
+                    text-[11px] font-semibold tracking-cap uppercase
+                    border border-accent/40 text-accent
+                    rounded-[2px]
+                  "
+                >
+                  {f}
+                </span>
               ))}
-            </ul>
-          </motion.div>
-        </div>
+            </div>
+            <p className="text-[11px] text-tertiary leading-relaxed max-w-lg">
+              {marketShift.focusNote}
+            </p>
+          </div>
+        </SectionReveal>
+
+        {/* Evidence cards header */}
+        <SectionReveal delay={0.1}>
+          <div className="flex items-center gap-4 mb-6">
+            <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-tertiary">
+              Market Evidence
+            </p>
+            <div className="flex-1 h-[1px] bg-border max-w-[120px]" aria-hidden="true" />
+          </div>
+        </SectionReveal>
+
+        {/* Evidence cards — stagger on scroll */}
+        <StaggerReveal className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {marketEvidence.map(card => (
+            <RevealItem key={card.source}>
+              <EvidenceCard card={card} reduced={reduced} />
+            </RevealItem>
+          ))}
+        </StaggerReveal>
+
       </div>
     </section>
   )
