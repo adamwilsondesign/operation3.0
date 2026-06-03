@@ -57,6 +57,8 @@ export interface ApprovalModel {
 export interface ProjectMeta {
   title: string
   thesis: string
+  heroHeadline: string
+  heroNarrative: string
   primaryMessage: string
   investmentUSD: number
   timelineMonths: number
@@ -65,11 +67,20 @@ export interface ProjectMeta {
   clarifications: string[]
 }
 
+// ─── Hero Chip types ──────────────────────────────────────────────────────────
+
+export type HeroStat = { kind: 'stat'; value: string; label: string }
+export type HeroTag  = { kind: 'tag';  text: string }
+export type HeroChip = HeroStat | HeroTag
+
 // ─── Project Meta ─────────────────────────────────────────────────────────────
 
 export const projectMeta: ProjectMeta = {
   title: 'Lazer Brand Evolution, Website Rebuild, and Sales Enablement System',
   thesis: 'This is not a redesign. This is revenue infrastructure for Lazer\'s next stage of growth.',
+  heroHeadline: 'Revenue infrastructure for Lazer\'s next stage of growth.',
+  heroNarrative:
+    'Lazer already has the ingredients: AI capability, design credibility, commerce experience, founder-led trust, strong proof, and enterprise-relevant work. The opportunity now is to package that value into a sharper system that helps the market understand, trust, and buy Lazer faster.',
   primaryMessage:
     'An integrated brand, website, proof, and sales enablement system designed to make Lazer easier to understand, easier to trust, and easier to buy.',
   investmentUSD: 60000,
@@ -83,6 +94,18 @@ export const projectMeta: ProjectMeta = {
     'Everything else in the brand system evolves.',
   ],
 }
+
+// ─── Hero Chips ───────────────────────────────────────────────────────────────
+
+export const heroChips: HeroChip[] = [
+  { kind: 'stat', value: '$60K',   label: 'USD total investment' },
+  { kind: 'stat', value: '2.5 mo', label: 'end-to-end delivery' },
+  { kind: 'stat', value: '20+',    label: 'case studies' },
+  { kind: 'stat', value: '5',      label: 'core focus decks' },
+  { kind: 'stat', value: '12',     label: 'service one-pagers' },
+  { kind: 'tag',  text: 'Full Webflow rebuild' },
+  { kind: 'tag',  text: 'Brand evolution — logo stays' },
+]
 
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
