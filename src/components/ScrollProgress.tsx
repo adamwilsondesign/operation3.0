@@ -1,27 +1,45 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { useReducedMotion } from 'framer-motion'
 
+/**
+ * Thin cobalt progress line pinned to the very top of the viewport.
+ * Uses requestAnimationFrame for smooth 60fps updates.
+ * Respects prefers-reduced-motion by hiding when motion is reduced.
+ */
 export default function ScrollProgress() {
-  const [progress, setProgress] = useState(0)
+  const barRef = useRef<HTMLDivElement>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
-    const handleScroll = () => {
+    if (prefersReducedMotion) return
+
+    let rafId: number
+
+    const update = () => {
       const total = document.documentElement.scrollHeight - window.innerHeight
-      setProgress(total > 0 ? (window.scrollY / total) * 100 : 0)
+      const pct   = total > 0 ? (window.scrollY / total) * 100 : 0
+
+      if (barRef.current) {
+        barRef.current.style.transform = `scaleX(${pct / 100})`
+      }
+      rafId = requestAnimationFrame(update)
     }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+
+    rafId = requestAnimationFrame(update)
+    return () => cancelAnimationFrame(rafId)
+  }, [prefersReducedMotion])
+
+  if (prefersReducedMotion) return null
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 h-[2px] bg-border">
+    <div
+      className="fixed top-0 left-0 right-0 z-50 h-[2px] bg-border"
+      aria-hidden="true"
+    >
       <div
-        className="h-full bg-accent transition-all duration-75"
-        style={{ width: `${progress}%` }}
-        role="progressbar"
-        aria-valuenow={Math.round(progress)}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label="Reading progress"
+        ref={barRef}
+        className="h-full bg-accent origin-left"
+        style={{ transform: 'scaleX(0)', willChange: 'transform' }}
       />
     </div>
   )

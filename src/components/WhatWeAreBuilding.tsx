@@ -8,7 +8,7 @@ export default function WhatWeAreBuilding() {
 
   return (
     <section
-      id="system"
+      id="scope"
       ref={ref}
       className="py-24 lg:py-32 px-6 lg:px-8 border-t border-border bg-surface"
       aria-label="What we are building"

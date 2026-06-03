@@ -87,13 +87,16 @@ export const projectMeta: ProjectMeta = {
 // ─── Navigation ───────────────────────────────────────────────────────────────
 
 export const navItems: NavItem[] = [
-  { label: 'Thesis', href: '#hero' },
-  { label: 'Problem', href: '#problem' },
-  { label: 'ROI', href: '#roi' },
-  { label: 'System', href: '#system' },
-  { label: 'Budget', href: '#budget' },
-  { label: 'Timeline', href: '#timeline' },
-  { label: 'Ask', href: '#ask' },
+  { label: 'Thesis',     href: '#hero' },
+  { label: 'Market',     href: '#market' },
+  { label: 'Problem',    href: '#problem' },
+  { label: 'ROI',        href: '#roi' },
+  { label: 'Scope',      href: '#scope' },
+  { label: 'Budget',     href: '#budget' },
+  { label: 'Payback',    href: '#payback' },
+  { label: 'Timeline',   href: '#timeline' },
+  { label: 'Ask',        href: '#ask' },
+  { label: 'References', href: '#references' },
 ]
 
 // ─── Metrics ──────────────────────────────────────────────────────────────────

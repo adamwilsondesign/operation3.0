@@ -24,7 +24,7 @@ export default function StrategicShift() {
 
   return (
     <section
-      id="shift"
+      id="market"
       ref={ref}
       className="py-24 lg:py-32 px-6 lg:px-8 border-t border-border"
       aria-label="Strategic shift"
