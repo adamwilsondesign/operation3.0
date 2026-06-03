@@ -102,7 +102,10 @@ export interface TimelinePhase {
   phase: string
   label: string
   duration: string
+  weekStart: number
+  weekEnd: number
   deliverables: string[]
+  milestones: string[]
 }
 
 export interface Reference {
@@ -694,58 +697,86 @@ export const totalBudget: number = budgetBuckets.reduce((sum, b) => sum + b.amou
 export const timelinePhases: TimelinePhase[] = [
   {
     phase: 'Phase 1',
-    label: 'Discovery & Strategy',
-    duration: 'Week 1–2',
+    label: 'Strategy & Audit',
+    duration: 'Weeks 1–2',
+    weekStart: 1,
+    weekEnd: 2,
     deliverables: [
       'Stakeholder interviews',
       'Competitive audit',
       'Positioning brief',
-      'Content & scope plan',
+      'Information architecture',
     ],
+    milestones: ['Positioning sign-off — Week 2'],
   },
   {
     phase: 'Phase 2',
-    label: 'Brand Evolution',
-    duration: 'Week 2–5',
+    label: 'Brand System',
+    duration: 'Weeks 2–5',
+    weekStart: 2,
+    weekEnd: 5,
     deliverables: [
       'Identity concepts',
-      'Design system',
+      'Design system & tokens',
       'Brand guidelines',
       'Asset library',
     ],
+    milestones: ['Brand direction approval — Week 4'],
   },
   {
     phase: 'Phase 3',
-    label: 'Website & Copy',
-    duration: 'Week 3–8',
+    label: 'Website Design & Build',
+    duration: 'Weeks 3–8',
+    weekStart: 3,
+    weekEnd: 8,
     deliverables: [
-      'IA & wireframes',
+      'UX wireframes',
       'Visual design',
       'Webflow development',
       '20+ case studies',
     ],
+    milestones: ['Design review — Week 5', 'Content freeze — Week 7'],
   },
   {
     phase: 'Phase 4',
-    label: 'Sales System',
-    duration: 'Week 6–9',
+    label: 'Sales Enablement',
+    duration: 'Weeks 5–9',
+    weekStart: 5,
+    weekEnd: 9,
     deliverables: [
       '5 focus-area decks',
       'Master deck template',
       'Pitch & proposal templates',
-      '~12 one-pagers',
+      '~12 service one-pagers',
     ],
+    milestones: ['Deck review — Week 7'],
   },
   {
     phase: 'Phase 5',
-    label: 'Launch',
-    duration: 'Week 10',
+    label: 'Social & Launch Kit',
+    duration: 'Weeks 8–10',
+    weekStart: 8,
+    weekEnd: 10,
     deliverables: [
-      'Site launch',
-      'Measurement setup',
-      'Team enablement',
-      'Handoff documentation',
+      'Social media templates',
+      'Launch announcement assets',
+      'Recruitment & culture assets',
     ],
+    milestones: [],
+  },
+  {
+    phase: 'Phase 6',
+    label: 'QA, Measurement & Handoff',
+    duration: 'Weeks 9–10',
+    weekStart: 9,
+    weekEnd: 10,
+    deliverables: [
+      'Full QA pass',
+      'GA4 & conversion tracking',
+      'Dashboard setup',
+      'Team enablement & documentation',
+    ],
+    milestones: ['Founder final review — Week 10'],
   },
 ]
 
