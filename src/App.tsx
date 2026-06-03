@@ -22,10 +22,10 @@ export default function App() {
     setRefsOpen(true)
   }, [])
 
-  const closeRefs = useCallback(() => {
-    setRefsOpen(false)
-    setHighlightRef(undefined)
-  }, [])
+  const toggleRefs = useCallback(() => {
+    setRefsOpen(prev => !prev)
+    if (refsOpen) setHighlightRef(undefined)
+  }, [refsOpen])
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function App() {
         <Closing />
       </main>
       <footer>
-        <References isOpen={refsOpen} onClose={closeRefs} highlightId={highlightRef} />
+        <References isOpen={refsOpen} onClose={toggleRefs} highlightId={highlightRef} />
       </footer>
     </>
   )
