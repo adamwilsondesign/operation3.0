@@ -213,10 +213,10 @@ export default function PaybackLogic() {
   return (
     <section
       id="payback"
-      className="py-28 lg:py-36 border-t border-border bg-surface"
+      className="snap-section overflow-y-auto border-t border-border bg-surface"
       aria-labelledby="payback-headline"
     >
-      <div className="section-container">
+      <div className="section-container py-8">
 
         {/* Header */}
         <SectionReveal>
@@ -237,14 +237,8 @@ export default function PaybackLogic() {
         </SectionReveal>
 
         <SectionReveal delay={0.14}>
-          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-4">
-            At a $60K external investment, the project pays for itself if it helps Lazer win, protect, or expand one meaningful engagement.
-          </p>
-        </SectionReveal>
-
-        <SectionReveal delay={0.18}>
-          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-14">
-            This does not need to transform the whole funnel to pay back. It only needs to improve one meaningful opportunity — then the system keeps compounding.
+          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-6">
+            At $60K, the project pays for itself if it helps Lazer win or expand one meaningful engagement. It only needs to move one opportunity — then the system keeps compounding.
           </p>
         </SectionReveal>
 

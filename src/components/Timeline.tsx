@@ -82,7 +82,7 @@ function GanttBar({
             }}
           >
             <div
-              className="w-2 h-2 rounded-full bg-white/90 border border-accent/60 shadow-[0_0_6px_rgba(37,99,235,0.5)]"
+              className="w-2 h-2 rounded-full bg-white/90 border border-accent/60 shadow-[0_0_6px_rgba(255,0,197,0.5)]"
               title={m}
               aria-label={`Milestone: ${m}`}
             />
@@ -108,10 +108,10 @@ export default function Timeline() {
   return (
     <section
       id="timeline"
-      className="py-28 lg:py-36 border-t border-border bg-surface"
+      className="snap-section overflow-y-auto border-t border-border bg-white"
       aria-labelledby="timeline-headline"
     >
-      <div className="section-container">
+      <div className="section-container py-8">
 
         {/* Header */}
         <SectionReveal>
@@ -132,7 +132,7 @@ export default function Timeline() {
         </SectionReveal>
 
         <SectionReveal delay={0.14}>
-          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-14">
+          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-6">
             Workstreams run in parallel from week two onward. No phase waits for another to finish — the system builds while earlier tracks are being approved.
           </p>
         </SectionReveal>
@@ -264,7 +264,7 @@ export default function Timeline() {
                   <span className="text-[11px] text-tertiary">Workstream</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-white/80 border border-accent/60 shadow-[0_0_5px_rgba(37,99,235,0.4)]" aria-hidden="true" />
+                  <div className="w-2 h-2 rounded-full bg-white/80 border border-accent/60 shadow-[0_0_5px_rgba(255,0,197,0.4)]" aria-hidden="true" />
                   <span className="text-[11px] text-tertiary">Milestone / approval</span>
                 </div>
               </div>

@@ -100,7 +100,7 @@ function DecisionCard({
         ${isLocked
           ? isDeprioritized
             ? 'border-border bg-surface-2 opacity-60'
-            : 'border-accent/30 bg-accent-dim shadow-[0_0_0_1px_rgba(37,99,235,0.08),0_4px_24px_rgba(37,99,235,0.07)]'
+            : 'border-accent/30 bg-accent-dim shadow-[0_0_0_1px_rgba(255,0,197,0.08),0_4px_24px_rgba(255,0,197,0.07)]'
           : 'border-border-mid bg-surface-2'
         }
       `}
@@ -141,7 +141,7 @@ function DecisionCard({
               <svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true">
                 <path
                   d="M1 3.5L3.5 6L8 1"
-                  stroke={isDeprioritized ? '#555' : '#2563eb'}
+                  stroke={isDeprioritized ? '#555' : '#FF00C5'}
                   strokeWidth="1.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -168,10 +168,10 @@ export default function ExecutiveAsk() {
   return (
     <section
       id="ask"
-      className="py-28 lg:py-36 border-t border-border bg-surface"
+      className="snap-section overflow-y-auto border-t border-border bg-surface"
       aria-labelledby="ask-headline"
     >
-      <div className="section-container">
+      <div className="section-container py-8">
 
         {/* Header */}
         <SectionReveal>
@@ -192,7 +192,7 @@ export default function ExecutiveAsk() {
         </SectionReveal>
 
         <SectionReveal delay={0.14}>
-          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-14">
+          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-6">
             Nine decisions. Each one scoped, bounded, and reversible at the next milestone. Together they authorize a complete system — not an open-ended engagement.
           </p>
         </SectionReveal>

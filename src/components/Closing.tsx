@@ -20,7 +20,7 @@ export default function Closing() {
   return (
     <section
       id="closing"
-      className="relative py-32 lg:py-48 border-t border-border overflow-hidden bg-surface"
+      className="snap-section flex flex-col justify-center border-t border-border bg-white overflow-hidden"
       aria-labelledby="closing-headline"
     >
       {/* Background glow */}
@@ -29,7 +29,7 @@ export default function Closing() {
           ref={glowRef}
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full"
           style={{
-            background: 'radial-gradient(ellipse at center, rgba(37,99,235,0.12) 0%, transparent 70%)',
+            background: 'radial-gradient(ellipse at center, rgba(255,0,197,0.12) 0%, transparent 70%)',
             filter: 'blur(40px)',
           }}
           initial={reduced ? false : { opacity: 0, scale: 0.7 }}
@@ -38,14 +38,14 @@ export default function Closing() {
         />
         <motion.div
           className="absolute top-1/2 left-0 right-0 h-[1px]"
-          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.15) 50%, transparent 100%)' }}
+          style={{ background: 'linear-gradient(90deg, transparent 0%, rgba(255,0,197,0.15) 50%, transparent 100%)' }}
           initial={reduced ? false : { scaleX: 0 }}
           animate={glowInView ? { scaleX: 1 } : {}}
           transition={{ duration: 1.4, delay: 0.3, ease: EASE }}
         />
       </div>
 
-      <div className="section-container relative">
+      <div className="section-container relative py-8 flex flex-col items-center justify-center h-full">
 
         <SectionReveal>
           <p className="eyebrow mb-8 text-center">The Bottom Line</p>
@@ -81,7 +81,7 @@ export default function Closing() {
           <p className="
             text-[15px] text-secondary leading-[1.65]
             text-center mx-auto max-w-[44ch]
-            mb-16
+            mb-8
           ">
             For the next phase of the business, this is not a marketing expense. It is a growth asset.
           </p>
@@ -89,7 +89,7 @@ export default function Closing() {
 
         {/* CTAs */}
         <SectionReveal delay={0.28}>
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-20">
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
             <a
               href="#ask"
               className="

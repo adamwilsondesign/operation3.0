@@ -72,7 +72,7 @@ function RefDrawer({
             className="
               fixed right-0 top-0 bottom-0
               w-full max-w-[480px]
-              bg-surface-2 border-l border-border-mid
+              bg-white border-l border-border-mid
               z-50 flex flex-col
             "
             role="dialog"
@@ -124,7 +124,7 @@ function RefDrawer({
                       p-4 rounded-[3px] border transition-all duration-300
                       ${highlighted
                         ? 'border-accent/35 bg-accent-dim'
-                        : 'border-border bg-surface'
+                        : 'border-border bg-surface-2'
                       }
                     `}
                   >

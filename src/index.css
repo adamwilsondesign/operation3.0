@@ -2,140 +2,122 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─── CSS Custom Properties ──────────────────────────────────────────────── */
 :root {
-  --noise-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  --grid-size: 72px;
-  --grid-color: rgba(37, 99, 235, 0.055);
-  --accent-rgb: 37 99 235;
+  --accent-rgb: 255 0 197;
+  --accent-2-rgb: 66 0 255;
+  --grid-size: 80px;
+  --grid-color: rgba(255, 0, 197, 0.04);
 }
 
-/* ─── Base Layer ─────────────────────────────────────────────────────────── */
 @layer base {
   *, *::before, *::after {
     box-sizing: border-box;
   }
 
   html {
-    scroll-behavior: smooth;
-    /* Reserve space for scrollbar so layout doesn't shift */
+    scroll-snap-type: y mandatory;
     overflow-y: scroll;
     scrollbar-gutter: stable;
+    height: 100%;
   }
 
   body {
-    background-color: #0a0a0a;
-    color: #f0efe9;
-    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #FFFFFF;
+    color: #0A0A0A;
+    font-family: 'Roboto', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+    height: 100%;
   }
 
-  /* Subdued selection */
   ::selection {
-    background-color: rgba(37, 99, 235, 0.28);
-    color: #f0efe9;
+    background-color: rgba(255, 0, 197, 0.20);
+    color: #0A0A0A;
   }
 
-  /* Thin, styled scrollbar — Chrome/Edge */
-  ::-webkit-scrollbar {
-    width: 4px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0a0a0a;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #2a2a2a;
-    border-radius: 2px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #3a3a3a;
-  }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #F5F5F5; }
+  ::-webkit-scrollbar-thumb { background: #D0D0D0; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: #BBBBBB; }
 
-  /* Focus ring: keyboard-only, accent-tinted */
   :focus-visible {
-    outline: 1.5px solid rgba(37, 99, 235, 0.7);
+    outline: 2px solid rgba(255, 0, 197, 0.7);
     outline-offset: 3px;
     border-radius: 2px;
   }
-  :focus:not(:focus-visible) {
-    outline: none;
-  }
+  :focus:not(:focus-visible) { outline: none; }
 
-  /* Heading defaults — weight is set per-instance */
   h1, h2, h3, h4 {
     text-wrap: balance;
-    font-feature-settings: 'kern' 1, 'liga' 1, 'ss01' 1;
+    font-feature-settings: 'kern' 1, 'liga' 1;
   }
 
-  /* Mono elements */
   code, kbd, samp, .font-mono {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'Roboto Mono', ui-monospace, monospace;
     font-variant-numeric: tabular-nums;
   }
 }
 
-/* ─── Component Layer ────────────────────────────────────────────────────── */
 @layer components {
-  /* ── Section container ── */
-  .section-container {
-    @apply max-w-7xl mx-auto px-6 lg:px-8;
+  /* Snap section — every section snaps */
+  .snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    height: 100dvh;
+    overflow: hidden;
+    position: relative;
   }
 
-  /* ── Eyebrow / overline label ── */
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 lg:px-10;
+  }
+
   .eyebrow {
     @apply text-accent text-eyebrow font-semibold tracking-wide uppercase;
   }
 
-  /* ── Card variants ── */
+  /* Cards */
   .card {
-    @apply bg-surface border border-border rounded-[3px] transition-colors duration-250;
+    @apply bg-bg border border-border rounded-[4px] shadow-card transition-all duration-250;
   }
   .card:hover {
-    @apply border-border-mid;
+    @apply border-border-mid shadow-card-hover;
   }
 
   .card-elevated {
-    @apply bg-surface-2 border border-border-mid rounded-[3px] shadow-inset-t transition-colors duration-250;
+    @apply bg-white border border-border-mid rounded-[4px] shadow-card transition-all duration-250;
   }
   .card-elevated:hover {
-    @apply border-border-light;
+    @apply border-border-light shadow-card-hover;
   }
 
   .card-accent {
-    @apply bg-accent-dim border border-accent/20 rounded-[3px] shadow-accent-sm
-           transition-all duration-400;
+    @apply border border-accent/25 rounded-[4px] transition-all duration-400;
+    background: rgba(255, 0, 197, 0.04);
   }
   .card-accent:hover {
-    @apply border-accent/35 shadow-accent-md;
+    @apply border-accent/40;
+    background: rgba(255, 0, 197, 0.07);
   }
 
   .card-glass {
-    @apply rounded-[3px] border border-white/[0.055] transition-colors duration-250;
-    background: rgba(255, 255, 255, 0.022);
-    backdrop-filter: blur(16px) saturate(140%);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-  }
-  .card-glass:hover {
-    border-color: rgba(255, 255, 255, 0.085);
+    @apply rounded-[4px] border border-black/[0.06] transition-colors duration-250;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
   }
 
-  /* ── Precision divider line ── */
   .precision-line {
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(37,99,235,0.45) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255,0,197,0.4) 50%, transparent 100%);
   }
 
-  /* ── Section reveal (base state — Framer takes over) ── */
   .reveal-ready {
     will-change: opacity, transform;
   }
 }
 
-/* ─── Utility Layer ──────────────────────────────────────────────────────── */
 @layer utilities {
-  /* Background textures */
   .bg-grid {
     background-image:
       linear-gradient(to right,  var(--grid-color) 1px, transparent 1px),
@@ -143,73 +125,40 @@
     background-size: var(--grid-size) var(--grid-size);
   }
 
-  .bg-noise {
-    background-image: var(--noise-url);
-    background-repeat: repeat;
-    background-size: 256px 256px;
-  }
-
-  .bg-vignette {
-    background: radial-gradient(
-      ellipse 100% 80% at 50% 0%,
-      transparent 30%,
-      rgba(10, 10, 10, 0.6) 70%,
-      #0a0a0a 100%
-    );
-  }
-
-  /* Text treatments */
   .text-gradient-primary {
-    background: linear-gradient(160deg, #f0efe9 0%, #8a8a8a 100%);
+    background: linear-gradient(160deg, #0A0A0A 0%, #555 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-gradient-accent {
-    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    background: linear-gradient(135deg, #FF00C5 0%, #4200FF 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  /* Glow utilities */
-  .glow-accent-sm  { box-shadow: 0 0 24px rgba(37,99,235,0.10); }
-  .glow-accent-md  { box-shadow: 0 0 48px rgba(37,99,235,0.15); }
-  .glow-accent-lg  { box-shadow: 0 0 80px rgba(37,99,235,0.20); }
-  .glow-accent-dot {
-    box-shadow:
-      0 0 0 1px rgba(37,99,235,0.4),
-      0 0 12px rgba(37,99,235,0.3);
-  }
+  .glow-accent-sm  { box-shadow: 0 0 24px rgba(255,0,197,0.12); }
+  .glow-accent-md  { box-shadow: 0 0 48px rgba(255,0,197,0.16); }
 
-  /* Dot indicator (used in nav active state) */
   .nav-active-dot::after {
     content: '';
     display: block;
     width: 3px;
     height: 3px;
-    background: #2563eb;
+    background: #FF00C5;
     border-radius: 50%;
     margin: 3px auto 0;
   }
 
-  /* Hairline border helpers */
   .border-hairline { border-width: 0.5px; }
-
-  /* Tabular numbers for data */
   .tabular { font-variant-numeric: tabular-nums; }
 
-  /* Hide scrollbar while keeping scroll functionality */
-  .no-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
 
-  /* Range input — cross-browser thumb */
+  /* Range input */
   input[type='range'] {
     -webkit-appearance: none;
     appearance: none;
@@ -223,63 +172,40 @@
   }
   input[type='range']::-webkit-slider-thumb {
     -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
+    width: 14px; height: 14px;
     border-radius: 50%;
-    background: #2563eb;
-    border: 2px solid #111111;
-    box-shadow: 0 0 0 1px rgba(37,99,235,0.35);
+    background: #FF00C5;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 0 1px rgba(255,0,197,0.35);
     margin-top: -5.5px;
     cursor: pointer;
     transition: box-shadow 0.15s;
   }
   input[type='range']:hover::-webkit-slider-thumb {
-    box-shadow: 0 0 0 4px rgba(37,99,235,0.2);
+    box-shadow: 0 0 0 4px rgba(255,0,197,0.2);
   }
   input[type='range']::-moz-range-track {
-    height: 3px;
-    background: transparent;
-    border-radius: 9999px;
+    height: 3px; background: transparent; border-radius: 9999px;
   }
   input[type='range']::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
+    width: 14px; height: 14px;
     border-radius: 50%;
-    background: #2563eb;
-    border: 2px solid #111111;
-    box-shadow: 0 0 0 1px rgba(37,99,235,0.35);
+    background: #FF00C5;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0 0 0 1px rgba(255,0,197,0.35);
     cursor: pointer;
-    transition: box-shadow 0.15s;
   }
-  input[type='range']:hover::-moz-range-thumb {
-    box-shadow: 0 0 0 4px rgba(37,99,235,0.2);
-  }
-  input[type='range']:focus-visible {
-    outline: none;
-  }
+  input[type='range']:focus-visible { outline: none; }
   input[type='range']:focus-visible::-webkit-slider-thumb {
-    box-shadow: 0 0 0 4px rgba(37,99,235,0.35);
-  }
-  input[type='range']:focus-visible::-moz-range-thumb {
-    box-shadow: 0 0 0 4px rgba(37,99,235,0.35);
+    box-shadow: 0 0 0 4px rgba(255,0,197,0.35);
   }
 }
 
-/* ─── Reduced Motion ─────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  /* Let Framer Motion read the media query via useReducedMotion;
-     kill CSS-only animations and transitions as a safety net */
-  *,
-  *::before,
-  *::after {
-    animation-duration:       0.01ms !important;
-    animation-iteration-count: 1     !important;
-    transition-duration:      0.01ms !important;
-    scroll-behavior:          auto   !important;
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

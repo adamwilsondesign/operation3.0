@@ -6,6 +6,28 @@ import { useCountUp } from '../lib/useCountUp'
 
 const CARD_GAP = 16 // px — matches gap-4
 
+const SOURCE_COLORS: Record<string, { bg: string; text: string; border: string }> = {
+  'McKinsey & Company': { bg: '#003366', text: '#FFFFFF', border: '#003366' },
+  'Gartner':            { bg: '#007932', text: '#FFFFFF', border: '#007932' },
+  '6sense':             { bg: '#6941C6', text: '#FFFFFF', border: '#6941C6' },
+  'Google / Vodafone':  { bg: '#EA4335', text: '#FFFFFF', border: '#EA4335' },
+  'Marq':               { bg: '#FF6B35', text: '#FFFFFF', border: '#FF6B35' },
+  'Edelman × LinkedIn': { bg: '#0A66C2', text: '#FFFFFF', border: '#0A66C2' },
+}
+
+function SourceBadge({ source }: { source: string }) {
+  const style = SOURCE_COLORS[source]
+  if (!style) return null
+  return (
+    <span
+      className="inline-flex items-center px-2 py-0.5 rounded-[2px] text-[9px] font-semibold tracking-wide"
+      style={{ background: style.bg, color: style.text, border: `1px solid ${style.border}` }}
+    >
+      {source}
+    </span>
+  )
+}
+
 interface Props {
   onRefClick: (id: number) => void
 }
@@ -52,15 +74,18 @@ function EvidenceCard({
       aria-label={`Evidence: ${card.source}`}
     >
       {/* Top row: workstream pill + source */}
-      <div className="flex items-start justify-between gap-3 mb-7">
-        <span className="
-          text-[9px] font-semibold tracking-[0.2em] uppercase
-          border border-border-mid text-tertiary
-          px-2 py-1 rounded-[2px]
-          leading-none
-        ">
-          {card.workstream}
-        </span>
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div className="flex flex-col gap-2">
+          <span className="
+            text-[9px] font-semibold tracking-[0.2em] uppercase
+            border border-border-mid text-tertiary
+            px-2 py-1 rounded-[2px]
+            leading-none
+          ">
+            {card.workstream}
+          </span>
+          <SourceBadge source={card.source} />
+        </div>
         <span className="text-[10px] font-mono text-tertiary text-right leading-snug shrink-0">
           {card.source}
         </span>
@@ -204,11 +229,11 @@ export default function RoiEvidence({ onRefClick }: Props) {
   return (
     <section
       id="roi"
-      className="py-28 lg:py-36 border-t border-border bg-surface"
+      className="snap-section flex flex-col justify-center bg-white border-t border-border"
       aria-labelledby="roi-headline"
     >
       {/* ── Section header ── */}
-      <div className="section-container mb-12">
+      <div className="section-container mb-6">
 
         <SectionReveal>
           <p className="eyebrow mb-5">The Business Case</p>
@@ -288,8 +313,8 @@ export default function RoiEvidence({ onRefClick }: Props) {
                   width:   i === activeIdx ? '20px' : '6px',
                   height:  '6px',
                   background: i === activeIdx
-                    ? '#2563eb'
-                    : 'rgba(46,46,46,1)',
+                    ? '#FF00C5'
+                    : 'rgba(200,200,200,1)',
                 }}
               />
             ))}

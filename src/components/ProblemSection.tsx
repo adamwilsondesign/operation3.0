@@ -21,10 +21,10 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="py-28 lg:py-36 border-t border-border"
+      className="snap-section flex flex-col justify-center border-t border-border bg-surface"
       aria-labelledby="problem-headline"
     >
-      <div className="section-container">
+      <div className="section-container relative py-8">
 
         {/* Header */}
         <SectionReveal>
@@ -46,7 +46,7 @@ export default function ProblemSection() {
 
         {/* Framing + toggle */}
         <SectionReveal delay={0.16}>
-          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-5 mb-6">
             <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch]">
               {problemComparison.framing}
             </p>
@@ -86,7 +86,7 @@ export default function ProblemSection() {
                 p-8 lg:p-10
                 border border-border
                 rounded-[3px] lg:rounded-r-none lg:border-r-0
-                bg-bg-raised
+                bg-surface-2
               "
             >
               <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-secondary mb-8">
@@ -135,10 +135,10 @@ export default function ProblemSection() {
               <motion.div
                 animate={reduced ? {} : {
                   borderColor: transformed
-                    ? 'rgba(37,99,235,0.50)'
+                    ? 'rgba(255,0,197,0.50)'
                     : 'rgba(26,26,26,1)',
                   backgroundColor: transformed
-                    ? 'rgba(37,99,235,0.10)'
+                    ? 'rgba(255,0,197,0.10)'
                     : 'rgba(13,13,13,1)',
                   scale: transformed ? 1.15 : 1,
                 }}
@@ -153,7 +153,7 @@ export default function ProblemSection() {
               >
                 <motion.span
                   animate={reduced ? {} : {
-                    color: transformed ? '#3b82f6' : '#555555',
+                    color: transformed ? '#FF00C5' : '#555555',
                   }}
                   transition={{ duration: 0.4, ease: EASE }}
                   className="text-[13px] font-mono text-tertiary leading-none"
@@ -180,10 +180,10 @@ export default function ProblemSection() {
             <motion.div
               animate={reduced ? {} : {
                 borderColor: transformed
-                  ? 'rgba(37,99,235,0.30)'
+                  ? 'rgba(255,0,197,0.30)'
                   : 'rgba(26,26,26,1)',
                 boxShadow: transformed
-                  ? '0 0 60px rgba(37,99,235,0.09)'
+                  ? '0 0 60px rgba(255,0,197,0.09)'
                   : '0 0 0px transparent',
               }}
               transition={{ duration: 0.5, ease: EASE }}
@@ -191,7 +191,7 @@ export default function ProblemSection() {
                 p-8 lg:p-10
                 border border-border
                 rounded-[3px] lg:rounded-l-none
-                bg-bg-raised
+                bg-surface-2
               "
             >
               <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-accent mb-8">
@@ -208,7 +208,7 @@ export default function ProblemSection() {
                   >
                     <motion.span
                       animate={reduced ? {} : {
-                        color: transformed ? '#3b82f6' : '#555555',
+                        color: transformed ? '#FF00C5' : '#555555',
                       }}
                       transition={{ duration: 0.4, ease: EASE }}
                       className="

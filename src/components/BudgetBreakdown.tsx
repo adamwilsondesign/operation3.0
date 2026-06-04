@@ -208,10 +208,10 @@ export default function BudgetBreakdown() {
   return (
     <section
       id="budget"
-      className="py-28 lg:py-36 border-t border-border bg-surface"
+      className="snap-section overflow-y-auto border-t border-border bg-white"
       aria-labelledby="budget-headline"
     >
-      <div className="section-container">
+      <div className="section-container py-8 min-h-full flex flex-col">
 
         {/* Header */}
         <SectionReveal>
@@ -232,7 +232,7 @@ export default function BudgetBreakdown() {
         </SectionReveal>
 
         <SectionReveal delay={0.14}>
-          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-14">
+          <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-6">
             This is a system-first V1 investment, not a bespoke campaign. The goal is to build reusable infrastructure once, then use it across every future buyer touchpoint.
           </p>
         </SectionReveal>
@@ -249,7 +249,7 @@ export default function BudgetBreakdown() {
 
         {/* Bucket selector rows */}
         <SectionReveal delay={0.26}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
             {budgetBuckets.map((b, i) => (
               <BucketRow
                 key={b.id}
