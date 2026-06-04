@@ -20,7 +20,6 @@ function NodeCard({
 
   return (
     <motion.article
-      layout={!reduced}
       onClick={onClick}
       onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onClick()}
       role="button"
@@ -140,7 +139,7 @@ export default function WhatWeAreBuilding() {
       aria-labelledby="scope-headline"
     >
       <CornerMarks />
-      <div className="section-container py-8 min-h-full flex flex-col">
+      <div className="section-container snap-section-inner min-h-full flex flex-col">
         {/* compact header */}
         <div className="mb-6">
           <p className="font-mono text-[9px] text-tertiary tracking-[0.2em] uppercase mb-3">// SYSTEM.OVERVIEW — 07 WORKSTREAMS</p>

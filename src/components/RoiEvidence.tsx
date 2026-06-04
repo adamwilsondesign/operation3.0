@@ -181,7 +181,7 @@ export default function RoiEvidence({ onRefClick }: Props) {
     >
       <CornerMarks />
       {/* ── Section header ── */}
-      <div className="section-container mb-6">
+      <div className="section-container mb-5" style={{ paddingTop: 'calc(var(--nav-h) + 1rem)' }}>
 
         <SectionReveal>
           <p className="eyebrow mb-5">The Business Case</p>
@@ -221,7 +221,7 @@ export default function RoiEvidence({ onRefClick }: Props) {
             px-6 lg:px-8
             pb-2
           "
-          style={{ scrollPaddingLeft: '1.5rem' }}
+          style={{ scrollPaddingLeft: '1.5rem', overscrollBehaviorX: 'contain' }}
           role="list"
           aria-label="ROI evidence cards"
         >

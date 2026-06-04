@@ -218,7 +218,7 @@ export default function PaybackLogic() {
       aria-labelledby="payback-headline"
     >
       <CornerMarks />
-      <div className="section-container py-8">
+      <div className="section-container snap-section-inner">
 
         {/* Header */}
         <SectionReveal>

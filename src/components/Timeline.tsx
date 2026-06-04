@@ -23,16 +23,12 @@ function GanttBar({
   index,
   inView,
   isActive,
-  onEnter,
-  onLeave,
   reduced,
 }: {
   phase: (typeof timelinePhases)[number]
   index: number
   inView: boolean
   isActive: boolean
-  onEnter: () => void
-  onLeave: () => void
   reduced: boolean | null
 }) {
   const startPct = ((phase.weekStart - 1) / TOTAL_WEEKS) * 100
@@ -41,10 +37,6 @@ function GanttBar({
   return (
     <div
       className="relative h-9 flex items-center"
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      onFocus={onEnter}
-      onBlur={onLeave}
       role="listitem"
     >
       {/* Track */}
@@ -113,7 +105,7 @@ export default function Timeline() {
       aria-labelledby="timeline-headline"
     >
       <CornerMarks />
-      <div className="section-container py-6">
+      <div className="section-container snap-section-inner">
 
         {/* Header */}
         <SectionReveal>
@@ -156,19 +148,17 @@ export default function Timeline() {
               ))}
             </div>
 
-            {/* Phase rows */}
+            {/* Phase rows — single hover zone per row to prevent flicker */}
             <div className="space-y-1.5" role="list" aria-label="Project timeline phases">
               {timelinePhases.map((phase, i) => (
                 <div
                   key={phase.phase}
                   className="flex items-center gap-3 lg:gap-5"
+                  onMouseEnter={() => setActiveIdx(i)}
+                  onMouseLeave={() => setActiveIdx(null)}
                 >
                   {/* Phase label */}
-                  <div
-                    className="w-[120px] lg:w-[160px] flex-shrink-0 cursor-default"
-                    onMouseEnter={() => setActiveIdx(i)}
-                    onMouseLeave={() => setActiveIdx(null)}
-                  >
+                  <div className="w-[120px] lg:w-[160px] flex-shrink-0 cursor-default">
                     <p className={`text-[9px] font-mono font-semibold tracking-[0.15em] uppercase transition-colors duration-200 ${activeIdx === i ? 'text-accent' : 'text-tertiary'}`}>
                       {phase.phase}
                     </p>
@@ -184,8 +174,6 @@ export default function Timeline() {
                       index={i}
                       inView={chartInView}
                       isActive={activeIdx === i}
-                      onEnter={() => setActiveIdx(i)}
-                      onLeave={() => setActiveIdx(null)}
                       reduced={reduced}
                     />
                   </div>

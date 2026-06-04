@@ -7,16 +7,24 @@ export default function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
-    const sections = navItems
+    // For snap-scroll: the active section is the one whose top is closest to scrollY
+    const sectionEls = navItems
       .map(item => document.querySelector<HTMLElement>(item.href))
       .filter(Boolean) as HTMLElement[]
-    if (!sections.length) return
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id) }),
-      { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
-    )
-    sections.forEach(s => obs.observe(s))
-    return () => obs.disconnect()
+    if (!sectionEls.length) return
+
+    const update = () => {
+      const mid = window.scrollY + window.innerHeight * 0.5
+      let best = sectionEls[0]
+      for (const el of sectionEls) {
+        if (el.offsetTop <= mid) best = el
+      }
+      setActive(best.id)
+    }
+
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    return () => window.removeEventListener('scroll', update)
   }, [])
 
   useEffect(() => {
@@ -64,17 +72,15 @@ export default function Nav() {
                   <a
                     href={item.href}
                     className={[
-                      'relative flex flex-col items-center px-2.5 py-1.5 rounded-[3px]',
-                      'text-[10px] font-medium tracking-[0.1em] uppercase transition-colors duration-200',
-                      isActive ? 'text-white bg-white/15 rounded-[3px]' : 'text-white/50 hover:text-white/80',
+                      'relative px-3 py-1.5 rounded-[3px]',
+                      'text-[10px] font-semibold tracking-[0.1em] uppercase transition-all duration-200',
+                      isActive
+                        ? 'text-accent bg-accent/10'
+                        : 'text-white/45 hover:text-white/80 hover:bg-white/5',
                     ].join(' ')}
                     aria-current={isActive ? 'location' : undefined}
                   >
                     {item.label}
-                    <span
-                      className={['w-full h-[2px] rounded-full bg-accent mt-0.5 transition-opacity duration-200', isActive ? 'opacity-100' : 'opacity-0'].join(' ')}
-                      aria-hidden="true"
-                    />
                   </a>
                 </li>
               )

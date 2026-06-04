@@ -70,12 +70,8 @@ export default function Hero() {
       id="hero"
       className="snap-section flex flex-col justify-center bg-white border-b border-border"
       aria-labelledby="hero-headline"
-      style={{ paddingTop: '56px' }}
     >
-      <CornerMarks label="EXEC-PROPOSAL-2025" />
-
-      {/* Subtle grid */}
-      <div className="absolute inset-0 bg-grid pointer-events-none opacity-100" aria-hidden="true" />
+      <CornerMarks />
 
       {/* Accent glow top-right */}
       <div
@@ -89,9 +85,7 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="section-container relative flex-1 flex flex-col justify-center py-8">
-        <p className="font-mono text-[8px] text-tertiary mb-6" aria-hidden="true">// HERO.001</p>
-
+      <div className="section-container relative flex-1 flex flex-col justify-center" style={{ paddingTop: 'calc(var(--nav-h) + 2rem)', paddingBottom: '2rem' }}>
         {/* Eyebrow */}
         <motion.div
           initial={reduced ? false : { opacity: 0, y: 12 }}
@@ -146,13 +140,6 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
-      </div>
-
-      {/* Coordinate labels */}
-      <div className="absolute bottom-16 left-0 right-0 flex justify-between px-6 lg:px-10 pointer-events-none" aria-hidden="true">
-        {['00.00', '25.00', '50.00', '75.00', '100.00'].map(v => (
-          <span key={v} className="font-mono text-[8px] text-border-mid tabular">{v}</span>
-        ))}
       </div>
 
       <ScrollCue reduced={reduced} />

@@ -32,7 +32,7 @@ function DonutChart({ buckets, activeId, onSelect, reduced }: {
       <svg width={SIZE} height={SIZE} viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true">
         {segments.map(({ b, i, pct, start }) => {
           const isActive = activeId === b.id
-          const dashLength = pct * CIRC - 2
+          const dashLength = pct * CIRC - 3
           const offset = -start * CIRC - CIRC / 4
           return (
             <motion.circle
@@ -40,13 +40,13 @@ function DonutChart({ buckets, activeId, onSelect, reduced }: {
               cx={cx} cy={cy} r={R}
               fill="none"
               stroke={BUCKET_COLORS[i]}
-              strokeWidth={isActive ? STROKE + 4 : STROKE}
+              strokeWidth={STROKE}
               strokeDasharray={`${dashLength} ${CIRC - dashLength}`}
               strokeDashoffset={offset}
               strokeLinecap="butt"
-              style={{ cursor: 'pointer', opacity: isActive ? 1 : 0.35 }}
-              animate={{ opacity: isActive ? 1 : 0.35 }}
-              transition={{ duration: reduced ? 0 : 0.25 }}
+              style={{ cursor: 'pointer' }}
+              animate={{ opacity: isActive ? 1 : 0.28 }}
+              transition={{ duration: reduced ? 0 : 0.22 }}
               onClick={() => onSelect(b.id)}
               aria-label={`${b.label}: ${fmt(b.amount)}`}
             />
@@ -140,7 +140,7 @@ export default function BudgetBreakdown() {
       aria-labelledby="budget-headline"
     >
       <CornerMarks />
-      <div className="section-container py-10 min-h-full flex flex-col justify-center">
+      <div className="section-container snap-section-inner min-h-full flex flex-col justify-center">
         <SectionReveal>
           <p className="font-mono text-[9px] text-tertiary tracking-[0.2em] uppercase mb-4">// INVESTMENT.BREAKDOWN</p>
         </SectionReveal>
