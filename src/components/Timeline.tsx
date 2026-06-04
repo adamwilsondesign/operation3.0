@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { timelinePhases, approvalModel } from '../data/proposal'
 import { SectionReveal } from './ui'
+import { CornerMarks } from './CornerMarks'
 
 const TOTAL_WEEKS = 10
 
@@ -35,7 +36,7 @@ function GanttBar({
   reduced: boolean | null
 }) {
   const startPct = ((phase.weekStart - 1) / TOTAL_WEEKS) * 100
-  const widthPct  = ((phase.weekEnd - phase.weekStart) / TOTAL_WEEKS) * 100
+  const widthPct  = ((phase.weekEnd - phase.weekStart + 1) / TOTAL_WEEKS) * 100
 
   return (
     <div
@@ -108,23 +109,24 @@ export default function Timeline() {
   return (
     <section
       id="timeline"
-      className="snap-section overflow-y-auto border-t border-border bg-white"
+      className="snap-section snap-section-scroll border-t border-border bg-white"
       aria-labelledby="timeline-headline"
     >
-      <div className="section-container py-8">
+      <CornerMarks />
+      <div className="section-container py-6">
 
         {/* Header */}
         <SectionReveal>
-          <p className="eyebrow mb-5">Timeline</p>
+          <p className="eyebrow mb-3">Timeline</p>
         </SectionReveal>
 
         <SectionReveal delay={0.08}>
           <h2
             id="timeline-headline"
             className="
-              text-display-lg font-black text-primary
+              text-display-md font-black text-primary
               tracking-editorial leading-editorial
-              max-w-[28ch] mb-6
+              max-w-[28ch] mb-4
             "
           >
             2.5 months. Parallel workstreams. Milestone approvals.
@@ -133,7 +135,7 @@ export default function Timeline() {
 
         <SectionReveal delay={0.14}>
           <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-6">
-            Workstreams run in parallel from week two onward. No phase waits for another to finish — the system builds while earlier tracks are being approved.
+            Six parallel workstreams. Milestone approvals at weeks 2, 4, 5, 7, and 10.
           </p>
         </SectionReveal>
 
@@ -142,7 +144,7 @@ export default function Timeline() {
           <div ref={chartRef} className="mb-8">
 
             {/* Week header */}
-            <div className="flex mb-3 pl-[140px] lg:pl-[200px]">
+            <div className="flex mb-3 pl-[120px] lg:pl-[160px]">
               {weeks.map(w => (
                 <div
                   key={w}
@@ -155,7 +157,7 @@ export default function Timeline() {
             </div>
 
             {/* Phase rows */}
-            <div className="space-y-2" role="list" aria-label="Project timeline phases">
+            <div className="space-y-1.5" role="list" aria-label="Project timeline phases">
               {timelinePhases.map((phase, i) => (
                 <div
                   key={phase.phase}
@@ -163,7 +165,7 @@ export default function Timeline() {
                 >
                   {/* Phase label */}
                   <div
-                    className="w-[140px] lg:w-[200px] flex-shrink-0 cursor-default"
+                    className="w-[120px] lg:w-[160px] flex-shrink-0 cursor-default"
                     onMouseEnter={() => setActiveIdx(i)}
                     onMouseLeave={() => setActiveIdx(null)}
                   >
@@ -192,8 +194,8 @@ export default function Timeline() {
             </div>
 
             {/* Week grid lines — decorative */}
-            <div className="relative mt-2 pl-[140px] lg:pl-[200px] h-3 pointer-events-none" aria-hidden="true">
-              <div className="absolute inset-x-[140px] lg:inset-x-[200px] inset-y-0 flex">
+            <div className="relative mt-2 pl-[120px] lg:pl-[160px] h-3 pointer-events-none" aria-hidden="true">
+              <div className="absolute inset-x-[120px] lg:inset-x-[160px] inset-y-0 flex">
                 {weeks.map(w => (
                   <div key={w} className="flex-1 border-l border-border/40 first:border-l-0" />
                 ))}
@@ -204,44 +206,34 @@ export default function Timeline() {
 
         {/* Hover detail panel */}
         <SectionReveal delay={0.1}>
-          <div className="min-h-[112px] mb-10">
+          <div className="min-h-[80px] mb-8">
             {activePhase ? (
               <motion.div
                 key={activePhase.phase}
                 initial={reduced ? false : { opacity: 0, y: 4 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.18 }}
-                className="card-elevated p-5 flex items-start gap-8"
+                className="card-elevated p-4 flex flex-col gap-2"
               >
-                <div className="min-w-0 flex-1">
-                  <p className="text-[9px] font-mono tracking-[0.2em] uppercase text-accent mb-1">
-                    {activePhase.phase} · {activePhase.duration}
-                  </p>
-                  <div className="flex flex-wrap gap-x-6 gap-y-1 mt-1">
-                    {activePhase.deliverables.map(d => (
-                      <span key={d} className="text-[12px] text-secondary flex items-center gap-1.5">
-                        <span className="w-1 h-1 rounded-full bg-border-light flex-shrink-0" aria-hidden="true" />
-                        {d}
-                      </span>
-                    ))}
-                  </div>
+                <div className="flex items-center gap-3">
+                  <p className="font-mono text-[9px] tracking-[0.2em] uppercase text-accent">{activePhase.phase}</p>
+                  <span className="text-border">·</span>
+                  <p className="font-mono text-[9px] text-tertiary">{activePhase.duration}</p>
                 </div>
-                {activePhase.milestones.length > 0 && (
-                  <div className="flex-shrink-0">
-                    <p className="text-[9px] font-semibold tracking-[0.22em] uppercase text-tertiary mb-1.5">
-                      Milestones
-                    </p>
-                    {activePhase.milestones.map(m => (
-                      <div key={m} className="flex items-center gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent/60 flex-shrink-0" aria-hidden="true" />
-                        <span className="text-[11px] font-mono text-secondary">{m}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <div className="flex flex-wrap gap-1.5">
+                  {activePhase.deliverables.map(d => (
+                    <span key={d} className="text-[10px] text-secondary border border-border px-2 py-0.5 rounded-[2px] bg-surface">{d}</span>
+                  ))}
+                  {activePhase.milestones.map(m => (
+                    <span key={m} className="text-[10px] text-accent border border-accent/30 bg-accent-dim px-2 py-0.5 rounded-[2px] flex items-center gap-1">
+                      <span className="w-1 h-1 rounded-full bg-accent inline-block" />
+                      {m}
+                    </span>
+                  ))}
+                </div>
               </motion.div>
             ) : (
-              <div className="border border-border rounded-[3px] p-5 flex items-center gap-3 opacity-30">
+              <div className="border border-border rounded-[3px] p-4 flex items-center gap-3 opacity-30">
                 <span className="text-[11px] font-mono text-tertiary">
                   Hover a phase to see deliverables and milestone markers.
                 </span>

@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { problemComparison } from '../data/proposal'
 import { SectionReveal } from './ui'
+import { CornerMarks } from './CornerMarks'
 
 const EASE = [0.25, 1, 0.5, 1] as const
 
@@ -21,9 +22,10 @@ export default function ProblemSection() {
   return (
     <section
       id="problem"
-      className="snap-section flex flex-col justify-center border-t border-border bg-surface"
+      className="snap-section flex flex-col justify-center border-t border-border bg-white"
       aria-labelledby="problem-headline"
     >
+      <CornerMarks />
       <div className="section-container relative py-8">
 
         {/* Header */}
@@ -92,7 +94,7 @@ export default function ProblemSection() {
               <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-secondary mb-8">
                 Current State
               </p>
-              <ul className="space-y-4" role="list">
+              <ul className="space-y-2.5" role="list">
                 {problemComparison.friction.map((item, i) => (
                   <motion.li
                     key={i}
@@ -111,7 +113,7 @@ export default function ProblemSection() {
                     >
                       —
                     </span>
-                    <span className="text-[13.5px] text-secondary leading-[1.6]">
+                    <span className="text-[13.5px] text-secondary leading-[1.4]">
                       {item.text}
                     </span>
                   </motion.li>
@@ -197,7 +199,7 @@ export default function ProblemSection() {
               <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-accent mb-8">
                 Target State
               </p>
-              <ul className="space-y-4" role="list">
+              <ul className="space-y-2.5" role="list">
                 {problemComparison.desired.map((item, i) => (
                   <motion.li
                     key={i}
@@ -220,7 +222,7 @@ export default function ProblemSection() {
                     >
                       →
                     </motion.span>
-                    <span className="text-[13.5px] text-primary leading-[1.6]">
+                    <span className="text-[13.5px] text-primary leading-[1.4]">
                       {item.text}
                     </span>
                   </motion.li>

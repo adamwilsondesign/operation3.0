@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { projectMeta, heroChips, type HeroChip } from '../data/proposal'
+import { CornerMarks } from './CornerMarks'
 
 const EASE = [0.16, 1, 0.3, 1] as const
 
@@ -9,11 +10,11 @@ function StatChip({ value, label, delay, reduced }: { value: string; label: stri
       initial={reduced ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: EASE }}
-      className="flex items-stretch border border-border-mid rounded-[3px] bg-white shadow-card overflow-hidden hover:border-accent/40 hover:shadow-accent-sm transition-all duration-250 group"
+      className="flex items-stretch border border-border-mid rounded-[3px] bg-white shadow-card overflow-hidden hover:border-accent/40 hover:shadow-accent-sm transition-all duration-250 group min-h-[44px]"
     >
-      <span className="px-3 py-2 font-mono text-[13px] font-semibold tabular text-primary group-hover:text-accent transition-colors duration-250 whitespace-nowrap">{value}</span>
+      <span className="px-3 py-2.5 font-mono text-[13px] font-semibold tabular text-primary group-hover:text-accent transition-colors duration-250 whitespace-nowrap flex items-center">{value}</span>
       <span className="w-[1px] self-stretch bg-border" aria-hidden="true" />
-      <span className="px-3 py-2 text-[11px] text-secondary leading-tight max-w-[100px] flex items-center">{label}</span>
+      <span className="px-3 py-2.5 text-[11px] text-secondary leading-tight max-w-[100px] flex items-center">{label}</span>
     </motion.div>
   )
 }
@@ -24,7 +25,7 @@ function TagChip({ text, delay, reduced }: { text: string; delay: number; reduce
       initial={reduced ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: EASE }}
-      className="flex items-center gap-2 border border-border-mid rounded-[3px] bg-white shadow-card px-3 py-2 hover:border-accent/40 transition-colors duration-250"
+      className="flex items-center gap-2 border border-border-mid rounded-[3px] bg-white shadow-card px-3 py-2.5 min-h-[44px] hover:border-accent/40 transition-colors duration-250"
     >
       <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" aria-hidden="true" />
       <span className="text-[11px] text-secondary whitespace-nowrap">{text}</span>
@@ -71,6 +72,8 @@ export default function Hero() {
       aria-labelledby="hero-headline"
       style={{ paddingTop: '56px' }}
     >
+      <CornerMarks label="EXEC-PROPOSAL-2025" />
+
       {/* Subtle grid */}
       <div className="absolute inset-0 bg-grid pointer-events-none opacity-100" aria-hidden="true" />
 
@@ -87,6 +90,7 @@ export default function Hero() {
       />
 
       <div className="section-container relative flex-1 flex flex-col justify-center py-8">
+        <p className="font-mono text-[8px] text-tertiary mb-6" aria-hidden="true">// HERO.001</p>
 
         {/* Eyebrow */}
         <motion.div
@@ -142,6 +146,13 @@ export default function Hero() {
             </div>
           ))}
         </motion.div>
+      </div>
+
+      {/* Coordinate labels */}
+      <div className="absolute bottom-16 left-0 right-0 flex justify-between px-6 lg:px-10 pointer-events-none" aria-hidden="true">
+        {['00.00', '25.00', '50.00', '75.00', '100.00'].map(v => (
+          <span key={v} className="font-mono text-[8px] text-border-mid tabular">{v}</span>
+        ))}
       </div>
 
       <ScrollCue reduced={reduced} />

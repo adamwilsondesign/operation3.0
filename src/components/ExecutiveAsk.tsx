@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion'
 import { approvalModel, totalBudget, projectMeta } from '../data/proposal'
 import { SectionReveal } from './ui'
+import { CornerMarks } from './CornerMarks'
 
 const fmt = (n: number) =>
   new Intl.NumberFormat('en-US', {
@@ -171,6 +172,7 @@ export default function ExecutiveAsk() {
       className="snap-section overflow-y-auto border-t border-border bg-surface"
       aria-labelledby="ask-headline"
     >
+      <CornerMarks />
       <div className="section-container py-8">
 
         {/* Header */}

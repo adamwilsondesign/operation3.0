@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { projectMeta, totalBudget } from '../data/proposal'
 import { SectionReveal } from './ui'
+import { CornerMarks } from './CornerMarks'
 
 const fmt = (n: number) =>
   new Intl.NumberFormat('en-US', {
@@ -23,6 +24,7 @@ export default function Closing() {
       className="snap-section flex flex-col justify-center border-t border-border bg-white overflow-hidden"
       aria-labelledby="closing-headline"
     >
+      <CornerMarks />
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <motion.div

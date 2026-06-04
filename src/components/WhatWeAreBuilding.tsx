@@ -1,6 +1,7 @@
 import { useState, useId } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { systemNodes, type SystemNode } from '../data/proposal'
+import { CornerMarks } from './CornerMarks'
 
 // ─── Node card (desktop grid + mobile stack) ──────────────────────────────────
 
@@ -32,14 +33,14 @@ function NodeCard({
         focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-bg
         ${isActive
           ? 'border-accent/40 bg-accent-dim shadow-[0_0_0_1px_rgba(255,0,197,0.15),0_4px_32px_rgba(255,0,197,0.10)]'
-          : 'border-border-mid bg-surface-2 hover:border-border-light hover:bg-surface-3'
+          : 'border-border-mid bg-surface-2 hover:border-border-light hover:bg-surface-3 hover:shadow-card-hover'
         }
       `}
     >
       {/* Header row — always visible */}
-      <div className="p-5 lg:p-6">
+      <div className="p-4">
         <div className="flex items-start justify-between gap-4 mb-3">
-          {/* Number + workstream */}
+          {/* Number */}
           <div className="flex items-center gap-3">
             <span className="
               text-[9px] font-mono font-semibold tracking-[0.22em] uppercase
@@ -47,32 +48,26 @@ function NodeCard({
             ">
               {node.number}
             </span>
-            <span className="
-              text-[9px] font-semibold tracking-[0.18em] uppercase
-              border border-border-mid text-tertiary
-              px-2 py-0.5 rounded-[2px] leading-none
-            ">
-              {node.workstream}
-            </span>
           </div>
 
           {/* Expand indicator */}
-          <motion.span
-            animate={{ rotate: isActive ? 45 : 0 }}
+          <motion.svg
+            width="14" height="14" viewBox="0 0 14 14" fill="none"
+            animate={{ rotate: isActive ? 180 : 0 }}
             transition={{ duration: reduced ? 0 : 0.2 }}
-            className="text-tertiary text-lg leading-none flex-shrink-0 mt-0.5"
+            className="flex-shrink-0 mt-0.5"
             aria-hidden="true"
           >
-            +
-          </motion.span>
+            <path d="M3 5l4 4 4-4" stroke={isActive ? '#FF00C5' : '#999'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </motion.svg>
         </div>
 
         <h3 className="
-          text-[14px] font-bold text-primary leading-snug tracking-tight mb-2
+          text-[13px] font-bold text-primary leading-snug tracking-tight mb-2
         ">
           {node.title}
         </h3>
-        <p className="text-[12px] text-secondary leading-[1.6]">
+        <p className="text-[11.5px] text-secondary leading-[1.6]">
           {node.description}
         </p>
       </div>
@@ -89,7 +84,7 @@ function NodeCard({
             transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
             className="overflow-hidden"
           >
-            <div className="px-5 lg:px-6 pb-5 lg:pb-6">
+            <div className="px-4 pb-4">
               <div className="h-[1px] bg-accent/15 mb-4" aria-hidden="true" />
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -141,19 +136,20 @@ export default function WhatWeAreBuilding() {
   return (
     <section
       id="scope"
-      className="snap-section overflow-y-auto border-t border-border bg-surface"
-      style={{ scrollSnapAlign: 'start' }}
+      className="snap-section snap-section-scroll border-t border-border bg-surface"
       aria-labelledby="scope-headline"
     >
+      <CornerMarks />
       <div className="section-container py-8 min-h-full flex flex-col">
         {/* compact header */}
         <div className="mb-6">
+          <p className="font-mono text-[9px] text-tertiary tracking-[0.2em] uppercase mb-3">// SYSTEM.OVERVIEW — 07 WORKSTREAMS</p>
           <p className="eyebrow mb-3">The System</p>
           <h2 id="scope-headline" className="text-display-lg font-black text-primary tracking-editorial leading-editorial max-w-[24ch] mb-3">
             One system. Every buyer touchpoint.
           </h2>
           <p className="text-[14px] text-secondary leading-[1.6] max-w-[50ch]">
-            Six workstreams. Each solves a distinct problem. Together they close the gap between what Lazer delivers and what buyers see.
+            Seven workstreams. Each solves a distinct problem. Together they close the gap between what Lazer delivers and what buyers see.
           </p>
         </div>
 

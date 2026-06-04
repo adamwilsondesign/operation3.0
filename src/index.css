@@ -6,7 +6,7 @@
   --accent-rgb: 255 0 197;
   --accent-2-rgb: 66 0 255;
   --grid-size: 80px;
-  --grid-color: rgba(255, 0, 197, 0.04);
+  --grid-color: rgba(255, 0, 197, 0.03);
 }
 
 @layer base {
@@ -15,7 +15,7 @@
   }
 
   html {
-    scroll-snap-type: y mandatory;
+    scroll-snap-type: none;
     overflow-y: scroll;
     scrollbar-gutter: stable;
     height: 100%;
@@ -59,13 +59,27 @@
 }
 
 @layer components {
-  /* Snap section — every section snaps */
+  /* Snap section — mobile: natural scroll; desktop: snap */
   .snap-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    height: 100dvh;
-    overflow: hidden;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
     position: relative;
+  }
+
+  @media (min-width: 1024px) {
+    html {
+      scroll-snap-type: y mandatory;
+    }
+    .snap-section {
+      height: 100dvh;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      overflow: hidden;
+    }
+    .snap-section-scroll {
+      overflow-y: auto;
+    }
   }
 
   .section-container {
@@ -158,6 +172,15 @@
   .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
 
+  .section-code {
+    font-family: 'Roboto Mono', ui-monospace, monospace;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999999;
+  }
+
   /* Range input */
   input[type='range'] {
     -webkit-appearance: none;
@@ -202,7 +225,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; scroll-snap-type: none; }
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

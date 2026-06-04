@@ -173,7 +173,7 @@ export const heroChips: HeroChip[] = [
   { kind: 'stat', value: '5',      label: 'core focus decks' },
   { kind: 'stat', value: '12',     label: 'service one-pagers' },
   { kind: 'tag',  text: 'Full Webflow rebuild' },
-  { kind: 'tag',  text: 'Brand evolution — logo stays' },
+  { kind: 'tag',  text: 'Brand evolution' },
 ]
 
 // ─── Market Shift ─────────────────────────────────────────────────────────────
@@ -594,6 +594,27 @@ export const systemNodes: SystemNode[] = [
     ],
     col: 3,
     row: 2,
+  },
+  {
+    id: 'ai-production',
+    number: '07',
+    title: 'AI Production System',
+    workstream: 'AI Enablement',
+    description: 'Design tokens, component libraries, and structured templates that slot directly into AI-assisted production — replacing Google Slides and PDF workflows with a vibe-codeable sales material ecosystem.',
+    includes: [
+      'Component library with AI-ready tokens',
+      'Structured slide & deck templates',
+      'Prompt-ready asset naming conventions',
+      'Documentation for AI-assisted updates',
+    ],
+    returns: [
+      'Sales materials updated in hours, not weeks',
+      'Consistent on-brand output from AI tools',
+      'Out of the Google Slides / PDF trap permanently',
+      'Compounding returns as AI tooling improves',
+    ],
+    col: 1,
+    row: 3,
   },
 ]
 

@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { totalBudget } from '../data/proposal'
 import { SectionReveal } from './ui'
+import { CornerMarks } from './CornerMarks'
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
@@ -213,23 +214,24 @@ export default function PaybackLogic() {
   return (
     <section
       id="payback"
-      className="snap-section overflow-y-auto border-t border-border bg-surface"
+      className="snap-section snap-section-scroll border-t border-border bg-surface"
       aria-labelledby="payback-headline"
     >
+      <CornerMarks />
       <div className="section-container py-8">
 
         {/* Header */}
         <SectionReveal>
-          <p className="eyebrow mb-5">Payback Logic</p>
+          <p className="eyebrow mb-3">Payback Logic</p>
         </SectionReveal>
 
         <SectionReveal delay={0.08}>
           <h2
             id="payback-headline"
             className="
-              text-display-lg font-black text-primary
+              text-display-md font-black text-primary
               tracking-editorial leading-editorial
-              max-w-[26ch] mb-6
+              max-w-[26ch] mb-4
             "
           >
             The payback bar is low. The upside compounds.
@@ -238,7 +240,7 @@ export default function PaybackLogic() {
 
         <SectionReveal delay={0.14}>
           <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-6">
-            At $60K, the project pays for itself if it helps Lazer win or expand one meaningful engagement. It only needs to move one opportunity — then the system keeps compounding.
+            At $60K, this project pays back from a single meaningful engagement. The math is simple — adjust the sliders.
           </p>
         </SectionReveal>
 
@@ -379,6 +381,18 @@ export default function PaybackLogic() {
                   </div>
                 </div>
 
+                {/* Payback reference */}
+                <div className="flex items-center gap-4 flex-wrap border border-border rounded-[3px] p-3 bg-surface mb-4">
+                  <p className="font-mono text-[8px] text-tertiary tracking-[0.2em] uppercase mr-2">// PAYBACK_REF</p>
+                  {PAYBACK_TABLE.map(row => (
+                    <div key={row.margin} className={`flex items-center gap-1.5 px-2 py-1 rounded-[2px] transition-colors duration-200 ${margin === row.margin ? 'bg-accent-dim' : ''}`}>
+                      <span className={`font-mono text-[11px] font-semibold tabular ${margin === row.margin ? 'text-accent' : 'text-tertiary'}`}>{row.margin}%</span>
+                      <span className="text-tertiary text-[9px]">→</span>
+                      <span className={`font-mono text-[11px] tabular ${margin === row.margin ? 'text-primary font-semibold' : 'text-secondary'}`}>{fmt(row.threshold)}</span>
+                    </div>
+                  ))}
+                </div>
+
                 {/* Investment reference line */}
                 <div className="border border-border-mid rounded-[3px] p-4 bg-surface">
                   <div className="flex items-center justify-between gap-4 mb-3">
@@ -407,61 +421,6 @@ export default function PaybackLogic() {
           </div>
         </SectionReveal>
 
-        {/* Payback table */}
-        <SectionReveal delay={0.1}>
-          <div className="border border-border rounded-[3px] overflow-hidden">
-            <div className="px-6 py-4 border-b border-border bg-surface-2">
-              <p className="text-[9px] font-semibold tracking-[0.22em] uppercase text-tertiary">
-                Payback Threshold Reference
-              </p>
-            </div>
-            <table className="w-full" aria-label="Payback threshold by margin">
-              <thead>
-                <tr className="border-b border-border bg-surface">
-                  <th className="px-6 py-3 text-left text-[10px] font-semibold tracking-[0.18em] uppercase text-tertiary">
-                    Contribution Margin
-                  </th>
-                  <th className="px-6 py-3 text-left text-[10px] font-semibold tracking-[0.18em] uppercase text-tertiary">
-                    Revenue Required to Cover $60K
-                  </th>
-                  <th className="px-6 py-3 text-right text-[10px] font-semibold tracking-[0.18em] uppercase text-tertiary hidden sm:table-cell">
-                    Contribution
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {PAYBACK_TABLE.map((row, i) => {
-                  const isCurrentMargin = margin === row.margin
-                  return (
-                    <tr
-                      key={row.margin}
-                      className={`
-                        border-b border-border last:border-0 transition-colors duration-200
-                        ${isCurrentMargin ? 'bg-accent-dim' : i % 2 === 0 ? 'bg-surface' : 'bg-surface-2'}
-                      `}
-                    >
-                      <td className="px-6 py-4">
-                        <span className={`text-[13px] font-mono font-semibold tabular ${isCurrentMargin ? 'text-accent' : 'text-secondary'}`}>
-                          {row.margin}%
-                        </span>
-                      </td>
-                      <td className="px-6 py-4">
-                        <span className={`text-[13px] font-mono tabular ${isCurrentMargin ? 'text-primary font-semibold' : 'text-secondary'}`}>
-                          {fmt(row.threshold)}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 text-right hidden sm:table-cell">
-                        <span className={`text-[11px] font-mono tabular text-tertiary`}>
-                          {fmt(row.threshold * (row.margin / 100))}
-                        </span>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
-        </SectionReveal>
 
       </div>
     </section>

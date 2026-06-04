@@ -3,6 +3,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { roiCards, type RoiCard } from '../data/proposal'
 import { SectionReveal } from './ui'
 import { useCountUp } from '../lib/useCountUp'
+import { CornerMarks } from './CornerMarks'
 
 const CARD_GAP = 16 // px — matches gap-4
 
@@ -62,49 +63,29 @@ function EvidenceCard({
   return (
     <article
       ref={ref}
-      className="
-        flex-none
-        card-elevated
-        flex flex-col
-        p-7 lg:p-8
-        snap-start
-        h-full
-      "
-      style={{ width: 'min(400px, 82vw)' }}
+      className="flex-none flex flex-col p-5 snap-start rounded-[4px] border border-border/60 h-auto"
+      style={{
+        width: 'min(380px, 82vw)',
+        background: 'linear-gradient(145deg, #ffffff 0%, #f9f9f9 100%)',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)',
+      }}
       aria-label={`Evidence: ${card.source}`}
     >
-      {/* Top row: workstream pill + source */}
-      <div className="flex items-start justify-between gap-3 mb-4">
-        <div className="flex flex-col gap-2">
-          <span className="
-            text-[9px] font-semibold tracking-[0.2em] uppercase
-            border border-border-mid text-tertiary
-            px-2 py-1 rounded-[2px]
-            leading-none
-          ">
-            {card.workstream}
-          </span>
-          <SourceBadge source={card.source} />
-        </div>
-        <span className="text-[10px] font-mono text-tertiary text-right leading-snug shrink-0">
-          {card.source}
+      {/* Header */}
+      <div className="flex items-center justify-between gap-2 mb-4">
+        <SourceBadge source={card.source} />
+        <span className="text-[9px] font-semibold tracking-[0.18em] uppercase border border-border-mid text-tertiary px-2 py-0.5 rounded-[2px] leading-none">
+          {card.workstream}
         </span>
       </div>
 
-      {/* Big stat */}
-      <div className="mb-5 select-none" aria-label={`Key metric: ${card.stat}`}>
-        <div className="flex items-baseline gap-0 font-mono font-black leading-none text-primary">
-          {card.prefix && (
-            <span
-              className="text-accent/70"
-              style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)' }}
-            >
-              {card.prefix}
-            </span>
-          )}
+      {/* Stat + metric — 2 col */}
+      <div className="grid grid-cols-[auto_1fr] gap-4 items-start mb-4">
+        <div className="flex items-baseline gap-0 font-mono font-black leading-none text-primary" aria-label={`Key metric: ${card.stat}`}>
+          {card.prefix && <span className="text-accent/70" style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>{card.prefix}</span>}
           <motion.span
             className="tabular"
-            style={{ fontSize: 'clamp(3rem, 6vw, 4.25rem)' }}
+            style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}
             initial={reduced ? false : { opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.3, delay: 0.1 }}
@@ -112,69 +93,35 @@ function EvidenceCard({
             {animated ? displayVal : card.stat}
           </motion.span>
           {card.suffix && animated && (
-            <span
-              className="text-accent/70"
-              style={{ fontSize: 'clamp(1.75rem, 3.5vw, 2.25rem)' }}
-            >
-              {card.suffix}
-            </span>
+            <span className="text-accent/70" style={{ fontSize: 'clamp(1.25rem, 2.5vw, 1.5rem)' }}>{card.suffix}</span>
           )}
         </div>
+        <p className="text-[12px] text-secondary leading-[1.5] pt-0.5">{card.metric}</p>
       </div>
 
-      {/* Metric description */}
-      <p className="text-[12.5px] text-secondary leading-[1.6] mb-6 flex-1">
-        {card.metric}
-      </p>
-
-      {/* Divider */}
-      <div className="h-[1px] bg-border mb-6" aria-hidden="true" />
-
-      {/* Why it matters */}
-      <div className="mb-6">
-        <p className="text-[9px] font-semibold tracking-[0.22em] uppercase text-tertiary mb-2">
-          Why it matters for Lazer
-        </p>
-        <p className="text-[12.5px] text-secondary leading-[1.6]">
-          {card.why}
-        </p>
+      {/* Divider + Why */}
+      <div className="h-[1px] bg-border mb-3" aria-hidden="true" />
+      <div className="mb-4 flex-1">
+        <p className="font-mono text-[8px] font-semibold tracking-[0.2em] uppercase text-tertiary mb-1.5">// WHY_IT_MATTERS</p>
+        <p className="text-[12px] text-secondary leading-[1.5]">{card.why}</p>
       </div>
 
       {/* Source row */}
-      <div className="flex items-center justify-between gap-3 mt-auto">
-        <div className="flex items-center gap-3 flex-wrap">
+      <div className="flex items-center justify-between gap-3 mt-auto pt-3 border-t border-border">
+        <div className="flex items-center gap-2 flex-wrap">
           {card.urls.map((url, i) => (
-            <a
-              key={url}
-              href={url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="
-                inline-flex items-center gap-1
-                text-[10px] font-mono text-tertiary
-                hover:text-accent transition-colors duration-250
-              "
-              aria-label={`Source: ${domainLabels[i]}`}
-            >
-              {domainLabels[i]}
-              <span aria-hidden="true">↗</span>
+            <a key={url} href={url} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-[10px] font-mono text-tertiary hover:text-accent transition-colors duration-250"
+              aria-label={`Source: ${domainLabels[i]}`}>
+              {domainLabels[i]}<span aria-hidden="true">↗</span>
             </a>
           ))}
         </div>
-
-        {/* Reference drawer link */}
         <div className="flex items-center gap-1.5 flex-shrink-0">
           {card.refIds.map(id => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => onRefClick(id)}
-              className="
-                text-[10px] font-mono text-tertiary
-                hover:text-accent transition-colors duration-250
-              "
-              aria-label={`View reference ${id}`}
-            >
+            <button key={id} type="button" onClick={() => onRefClick(id)}
+              className="text-[10px] font-mono text-tertiary hover:text-accent transition-colors duration-250"
+              aria-label={`View reference ${id}`}>
               [{id}]
             </button>
           ))}
@@ -229,9 +176,10 @@ export default function RoiEvidence({ onRefClick }: Props) {
   return (
     <section
       id="roi"
-      className="snap-section flex flex-col justify-center bg-white border-t border-border"
+      className="snap-section flex flex-col justify-center bg-surface border-t border-border"
       aria-labelledby="roi-headline"
     >
+      <CornerMarks />
       {/* ── Section header ── */}
       <div className="section-container mb-6">
 

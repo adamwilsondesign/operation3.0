@@ -52,7 +52,7 @@ export default function Nav() {
               <polygon points="14,1 42,1 56,61 0,61" fill="#FF00C5"/>
             </svg>
             <span className="text-white font-black text-[17px] tracking-[-0.03em] lowercase">lazer</span>
-            <span className="text-white/30 text-xs font-normal tracking-[0.12em] uppercase ml-1">Proposal</span>
+            <span className="text-accent/80 text-xs font-normal tracking-[0.12em] uppercase ml-1">Proposal</span>
           </a>
 
           {/* Desktop links */}
@@ -66,13 +66,13 @@ export default function Nav() {
                     className={[
                       'relative flex flex-col items-center px-2.5 py-1.5 rounded-[3px]',
                       'text-[10px] font-medium tracking-[0.1em] uppercase transition-colors duration-200',
-                      isActive ? 'text-accent' : 'text-white/50 hover:text-white/80',
+                      isActive ? 'text-white bg-white/15 rounded-[3px]' : 'text-white/50 hover:text-white/80',
                     ].join(' ')}
                     aria-current={isActive ? 'location' : undefined}
                   >
                     {item.label}
                     <span
-                      className={['absolute -bottom-[1px] left-1/2 -translate-x-1/2 w-[3px] h-[3px] rounded-full bg-accent transition-opacity duration-200', isActive ? 'opacity-100' : 'opacity-0'].join(' ')}
+                      className={['w-full h-[2px] rounded-full bg-accent mt-0.5 transition-opacity duration-200', isActive ? 'opacity-100' : 'opacity-0'].join(' ')}
                       aria-hidden="true"
                     />
                   </a>
