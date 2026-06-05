@@ -385,7 +385,6 @@ export const navItems: NavItem[] = [
   { label: 'Payback',    href: '#payback' },
   { label: 'Timeline',   href: '#timeline' },
   { label: 'Ask',        href: '#ask' },
-  { label: 'References', href: '#references' },
 ]
 
 // ─── Metrics ──────────────────────────────────────────────────────────────────

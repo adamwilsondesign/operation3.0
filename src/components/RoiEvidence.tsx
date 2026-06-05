@@ -29,19 +29,13 @@ function SourceBadge({ source }: { source: string }) {
   )
 }
 
-interface Props {
-  onRefClick: (id: number) => void
-}
-
 // ─── Evidence Card ────────────────────────────────────────────────────────────
 
 function EvidenceCard({
   card,
-  onRefClick,
   reduced,
 }: {
   card: RoiCard
-  onRefClick: (id: number) => void
   reduced: boolean | null
 }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -107,25 +101,14 @@ function EvidenceCard({
       </div>
 
       {/* Source row */}
-      <div className="flex items-center justify-between gap-3 mt-auto pt-3 border-t border-border">
-        <div className="flex items-center gap-2 flex-wrap">
-          {card.urls.map((url, i) => (
-            <a key={url} href={url} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-[10px] font-mono text-tertiary hover:text-accent transition-colors duration-250"
-              aria-label={`Source: ${domainLabels[i]}`}>
-              {domainLabels[i]}<span aria-hidden="true">↗</span>
-            </a>
-          ))}
-        </div>
-        <div className="flex items-center gap-1.5 flex-shrink-0">
-          {card.refIds.map(id => (
-            <button key={id} type="button" onClick={() => onRefClick(id)}
-              className="text-[10px] font-mono text-tertiary hover:text-accent transition-colors duration-250"
-              aria-label={`View reference ${id}`}>
-              [{id}]
-            </button>
-          ))}
-        </div>
+      <div className="flex items-center gap-2 flex-wrap mt-auto pt-3 border-t border-border">
+        {card.urls.map((url, i) => (
+          <a key={url} href={url} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-[10px] font-mono text-tertiary hover:text-accent transition-colors duration-250"
+            aria-label={`Source: ${domainLabels[i]}`}>
+            {domainLabels[i]}<span aria-hidden="true">↗</span>
+          </a>
+        ))}
       </div>
     </article>
   )
@@ -133,7 +116,7 @@ function EvidenceCard({
 
 // ─── Main section ─────────────────────────────────────────────────────────────
 
-export default function RoiEvidence({ onRefClick }: Props) {
+export default function RoiEvidence() {
   const reduced = useReducedMotion()
   const scrollRef   = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(0)
@@ -230,7 +213,6 @@ export default function RoiEvidence({ onRefClick }: Props) {
             <div key={card.id} role="listitem" className="flex">
               <EvidenceCard
                 card={card}
-                onRefClick={onRefClick}
                 reduced={reduced}
               />
             </div>

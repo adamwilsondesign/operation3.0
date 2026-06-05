@@ -1,4 +1,3 @@
-import { useState, useCallback } from 'react'
 import Nav            from './components/Nav'
 import Hero           from './components/Hero'
 import StrategicShift from './components/StrategicShift'
@@ -10,27 +9,8 @@ import PaybackLogic   from './components/PaybackLogic'
 import Timeline       from './components/Timeline'
 import ExecutiveAsk   from './components/ExecutiveAsk'
 import Closing        from './components/Closing'
-import References     from './components/References'
 
 export default function App() {
-  const [refsOpen,     setRefsOpen]     = useState(false)
-  const [highlightRef, setHighlightRef] = useState<number | undefined>()
-
-  const openRef = useCallback((id: number) => {
-    setHighlightRef(id)
-    setRefsOpen(true)
-  }, [])
-
-  const openRefs = useCallback(() => {
-    setHighlightRef(undefined)
-    setRefsOpen(true)
-  }, [])
-
-  const closeRefs = useCallback(() => {
-    setRefsOpen(false)
-    setHighlightRef(undefined)
-  }, [])
-
   return (
     <div className="relative bg-bg">
       <Nav />
@@ -38,7 +18,7 @@ export default function App() {
         <Hero />
         <StrategicShift />
         <ProblemSection />
-        <RoiEvidence onRefClick={openRef} />
+        <RoiEvidence />
         <WhatWeAreBuilding />
         <BudgetBreakdown />
         <PaybackLogic />
@@ -46,12 +26,6 @@ export default function App() {
         <ExecutiveAsk />
         <Closing />
       </main>
-      <References
-        isOpen={refsOpen}
-        onOpen={openRefs}
-        onClose={closeRefs}
-        highlightId={highlightRef}
-      />
     </div>
   )
 }
