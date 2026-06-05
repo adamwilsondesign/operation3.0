@@ -12,12 +12,6 @@ export default function StrategicShift() {
     >
       <CornerMarks />
 
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 80% 60% at 60% 50%, rgba(66,0,255,0.04) 0%, transparent 70%)' }}
-        aria-hidden="true"
-      />
-
       <div className="section-container relative py-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* LEFT: headline + narrative */}

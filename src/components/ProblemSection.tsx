@@ -142,8 +142,8 @@ export default function ProblemSection() {
                     ? 'rgba(255,0,197,0.50)'
                     : 'rgba(26,26,26,1)',
                   backgroundColor: transformed
-                    ? 'rgba(255,0,197,0.10)'
-                    : 'rgba(13,13,13,1)',
+                    ? '#FCEEF9'
+                    : '#0D0D0D',
                   scale: transformed ? 1.15 : 1,
                 }}
                 transition={{ duration: 0.5, ease: EASE }}

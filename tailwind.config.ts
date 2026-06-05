@@ -18,9 +18,9 @@ export default {
         tertiary:     '#999999',
         accent:       '#FF00C5',
         'accent-light':'#FF33D0',
-        'accent-dim': 'rgba(255,0,197,0.08)',
+        'accent-dim': '#FCEEF9',
         'accent-2':   '#4200FF',
-        'accent-2-dim':'rgba(66,0,255,0.07)',
+        'accent-2-dim':'#EEF0FF',
       },
       fontFamily: {
         sans: ['Roboto', 'system-ui', 'sans-serif'],

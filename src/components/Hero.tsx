@@ -73,17 +73,6 @@ export default function Hero() {
     >
       <CornerMarks />
 
-      {/* Accent glow top-right */}
-      <div
-        className="absolute top-0 right-0 w-[600px] h-[600px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle at 70% 20%, rgba(255,0,197,0.06) 0%, transparent 65%)' }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] pointer-events-none"
-        style={{ background: 'radial-gradient(circle at 30% 80%, rgba(66,0,255,0.05) 0%, transparent 60%)' }}
-        aria-hidden="true"
-      />
 
       <div className="section-container relative flex-1 flex flex-col justify-center py-8">
         {/* Eyebrow */}

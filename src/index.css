@@ -118,11 +118,11 @@
 
   .card-accent {
     @apply border border-accent/25 rounded-[4px] transition-all duration-400;
-    background: rgba(255, 0, 197, 0.04);
+    background: #FCEEF9;
   }
   .card-accent:hover {
     @apply border-accent/40;
-    background: rgba(255, 0, 197, 0.07);
+    background: #F9E4F5;
   }
 
   .card-glass {

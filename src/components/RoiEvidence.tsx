@@ -66,7 +66,7 @@ function EvidenceCard({
       className="flex-none flex flex-col p-5 snap-start rounded-[4px] border border-border/60 h-auto"
       style={{
         width: 'min(380px, 82vw)',
-        background: 'linear-gradient(145deg, #ffffff 0%, #f9f9f9 100%)',
+        background: '#ffffff',
         boxShadow: '0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04)',
       }}
       aria-label={`Evidence: ${card.source}`}
