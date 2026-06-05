@@ -85,7 +85,7 @@ export default function Hero() {
         aria-hidden="true"
       />
 
-      <div className="section-container relative flex-1 flex flex-col justify-center" style={{ paddingTop: 'calc(var(--nav-h) + 2rem)', paddingBottom: '2rem' }}>
+      <div className="section-container relative flex-1 flex flex-col justify-center py-8">
         {/* Eyebrow */}
         <motion.div
           initial={reduced ? false : { opacity: 0, y: 12 }}

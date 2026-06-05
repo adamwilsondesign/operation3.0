@@ -181,7 +181,7 @@ export default function RoiEvidence({ onRefClick }: Props) {
     >
       <CornerMarks />
       {/* ── Section header ── */}
-      <div className="section-container mb-5" style={{ paddingTop: 'calc(var(--nav-h) + 1rem)' }}>
+      <div className="section-container mb-5">
 
         <SectionReveal>
           <p className="eyebrow mb-5">The Business Case</p>

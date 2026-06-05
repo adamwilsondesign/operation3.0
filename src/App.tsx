@@ -1,6 +1,5 @@
 import { useState, useCallback } from 'react'
 import Nav            from './components/Nav'
-import ScrollProgress from './components/ScrollProgress'
 import Hero           from './components/Hero'
 import StrategicShift from './components/StrategicShift'
 import ProblemSection from './components/ProblemSection'
@@ -34,10 +33,8 @@ export default function App() {
 
   return (
     <div className="relative bg-bg">
-      <ScrollProgress />
       <Nav />
-
-      <main>
+      <main className="lg:ml-60 pt-14 lg:pt-0">
         <Hero />
         <StrategicShift />
         <ProblemSection />
@@ -49,7 +46,6 @@ export default function App() {
         <ExecutiveAsk />
         <Closing />
       </main>
-
       <References
         isOpen={refsOpen}
         onOpen={openRefs}

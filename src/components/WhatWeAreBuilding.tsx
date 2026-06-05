@@ -1,9 +1,8 @@
-import { useState, useId } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { systemNodes, type SystemNode } from '../data/proposal'
+import { useState } from 'react'
+import { motion, useReducedMotion } from 'framer-motion'
+import { systemNodes } from '../data/proposal'
 import { CornerMarks } from './CornerMarks'
-
-// ─── Node card (desktop grid + mobile stack) ──────────────────────────────────
+import { SectionReveal } from './ui'
 
 function NodeCard({
   node,
@@ -11,13 +10,11 @@ function NodeCard({
   onClick,
   reduced,
 }: {
-  node: SystemNode
+  node: typeof systemNodes[number]
   isActive: boolean
   onClick: () => void
   reduced: boolean | null
 }) {
-  const detailId = useId()
-
   return (
     <motion.article
       onClick={onClick}
@@ -25,107 +22,71 @@ function NodeCard({
       role="button"
       tabIndex={0}
       aria-expanded={isActive}
-      aria-controls={detailId}
-      className={`
-        relative cursor-pointer select-none
-        rounded-[3px] border transition-all duration-300
-        focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1 focus-visible:ring-offset-bg
-        ${isActive
-          ? 'border-accent/40 bg-accent-dim shadow-[0_0_0_1px_rgba(255,0,197,0.15),0_4px_32px_rgba(255,0,197,0.10)]'
-          : 'border-border-mid bg-surface-2 hover:border-border-light hover:bg-surface-3 hover:shadow-card-hover'
-        }
-      `}
+      whileHover={reduced ? undefined : { y: -1 }}
+      transition={{ duration: 0.15 }}
+      className={[
+        'relative cursor-pointer select-none flex flex-col h-full',
+        'rounded-[3px] border transition-all duration-250',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-1',
+        isActive
+          ? 'border-accent/50 bg-accent-dim shadow-[0_0_0_1px_rgba(255,0,197,0.12),0_6px_28px_rgba(255,0,197,0.12)]'
+          : 'border-border-mid bg-white hover:border-accent/30 hover:shadow-card-hover hover:bg-surface',
+      ].join(' ')}
     >
-      {/* Header row — always visible */}
-      <div className="p-4">
-        <div className="flex items-start justify-between gap-4 mb-3">
-          {/* Number */}
-          <div className="flex items-center gap-3">
-            <span className="
-              text-[9px] font-mono font-semibold tracking-[0.22em] uppercase
-              text-accent/70
-            ">
-              {node.number}
-            </span>
-          </div>
-
-          {/* Expand indicator */}
+      <div className="p-4 flex flex-col h-full">
+        {/* Number + chevron row */}
+        <div className="flex items-center justify-between mb-3">
+          <span className="font-mono text-[9px] font-semibold tracking-[0.22em] uppercase text-accent/60">
+            {node.number}
+          </span>
           <motion.svg
-            width="14" height="14" viewBox="0 0 14 14" fill="none"
+            width="12" height="12" viewBox="0 0 12 12" fill="none"
             animate={{ rotate: isActive ? 180 : 0 }}
-            transition={{ duration: reduced ? 0 : 0.2 }}
-            className="flex-shrink-0 mt-0.5"
+            transition={{ duration: reduced ? 0 : 0.18 }}
             aria-hidden="true"
           >
-            <path d="M3 5l4 4 4-4" stroke={isActive ? '#FF00C5' : '#999'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M2 4.5l4 3 4-3" stroke={isActive ? '#FF00C5' : '#AAAAAA'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
           </motion.svg>
         </div>
 
-        <h3 className="
-          text-[13px] font-bold text-primary leading-snug tracking-tight mb-2
-        ">
+        {/* Title */}
+        <h3 className={[
+          'text-[13px] font-bold leading-snug tracking-tight mb-2 transition-colors duration-200',
+          isActive ? 'text-accent' : 'text-primary',
+        ].join(' ')}>
           {node.title}
         </h3>
-        <p className="text-[11.5px] text-secondary leading-[1.6]">
+
+        {/* Description — always visible */}
+        <p className="text-[11px] text-secondary leading-[1.5] mb-3">
           {node.description}
         </p>
-      </div>
 
-      {/* Expanded detail */}
-      <AnimatePresence initial={false}>
+        {/* Expanded detail — inline, no height animation */}
         {isActive && (
           <motion.div
-            id={detailId}
-            key="detail"
-            initial={reduced ? false : { height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={reduced ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
-            className="overflow-hidden"
+            initial={reduced ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            className="flex-1 pt-3 border-t border-accent/15"
           >
-            <div className="px-4 pb-4">
-              <div className="h-[1px] bg-accent/15 mb-4" aria-hidden="true" />
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                {/* Includes */}
-                <div>
-                  <p className="text-[9px] font-semibold tracking-[0.22em] uppercase text-accent/70 mb-2">
-                    Includes
-                  </p>
-                  <ul className="space-y-1.5" aria-label={`${node.title} includes`}>
-                    {node.includes.map(item => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="text-accent/50 leading-none mt-[3px] flex-shrink-0" aria-hidden="true">—</span>
-                        <span className="text-[11px] text-secondary leading-[1.55]">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Returns */}
-                <div>
-                  <p className="text-[9px] font-semibold tracking-[0.22em] uppercase text-tertiary mb-2">
-                    Returns
-                  </p>
-                  <ul className="space-y-1.5" aria-label={`${node.title} returns`}>
-                    {node.returns.map(item => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="text-accent leading-none mt-[3px] flex-shrink-0 text-[10px]" aria-hidden="true">↑</span>
-                        <span className="text-[11px] text-secondary leading-[1.55]">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <p className="font-mono text-[8px] font-semibold tracking-[0.2em] uppercase text-accent/60 mb-1.5">
+              Key deliverables
+            </p>
+            <ul className="space-y-1">
+              {node.includes.slice(0, 3).map(item => (
+                <li key={item} className="flex items-start gap-1.5">
+                  <span className="text-accent/50 text-[9px] mt-[2px] flex-shrink-0">—</span>
+                  <span className="text-[10px] text-secondary leading-[1.4]">{item}</span>
+                </li>
+              ))}
+            </ul>
           </motion.div>
         )}
-      </AnimatePresence>
+      </div>
     </motion.article>
   )
 }
-
-// ─── Main section ─────────────────────────────────────────────────────────────
 
 export default function WhatWeAreBuilding() {
   const reduced = useReducedMotion()
@@ -135,39 +96,47 @@ export default function WhatWeAreBuilding() {
   return (
     <section
       id="scope"
-      className="snap-section snap-section-scroll border-t border-border bg-surface"
+      className="snap-section flex flex-col justify-center border-t border-border bg-surface"
       aria-labelledby="scope-headline"
     >
       <CornerMarks />
-      <div className="section-container snap-section-inner min-h-full flex flex-col">
-        {/* compact header */}
-        <div className="mb-6">
-          <p className="font-mono text-[9px] text-tertiary tracking-[0.2em] uppercase mb-3">// SYSTEM.OVERVIEW — 07 WORKSTREAMS</p>
-          <p className="eyebrow mb-3">The System</p>
-          <h2 id="scope-headline" className="text-display-lg font-black text-primary tracking-editorial leading-editorial max-w-[24ch] mb-3">
-            One system. Every buyer touchpoint.
-          </h2>
-          <p className="text-[14px] text-secondary leading-[1.6] max-w-[50ch]">
-            Seven workstreams. Each solves a distinct problem. Together they close the gap between what Lazer delivers and what buyers see.
+      <div className="section-container py-8 flex flex-col" style={{ maxHeight: '100dvh' }}>
+
+        {/* Header */}
+        <div className="mb-5">
+          <SectionReveal>
+            <p className="font-mono text-[9px] text-tertiary tracking-[0.2em] uppercase mb-2">// SYSTEM.OVERVIEW — 07 WORKSTREAMS</p>
+          </SectionReveal>
+          <SectionReveal delay={0.05}>
+            <p className="eyebrow mb-2">The System</p>
+          </SectionReveal>
+          <SectionReveal delay={0.1}>
+            <h2 id="scope-headline" className="text-display-md font-black text-primary tracking-editorial leading-editorial max-w-[36ch]">
+              One system. Every buyer touchpoint.
+            </h2>
+          </SectionReveal>
+        </div>
+
+        {/* 4-column grid */}
+        <SectionReveal delay={0.15} className="flex-1">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 h-full">
+            {systemNodes.map(node => (
+              <NodeCard
+                key={node.id}
+                node={node}
+                isActive={activeId === node.id}
+                onClick={() => toggle(node.id)}
+                reduced={reduced}
+              />
+            ))}
+          </div>
+        </SectionReveal>
+
+        <SectionReveal delay={0.1}>
+          <p className="font-mono text-[9px] text-tertiary tracking-[0.15em] mt-4">
+            SELECT WORKSTREAM → EXPAND DELIVERABLES
           </p>
-        </div>
-
-        {/* Node grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 flex-1">
-          {systemNodes.map(node => (
-            <NodeCard
-              key={node.id}
-              node={node}
-              isActive={activeId === node.id}
-              onClick={() => toggle(node.id)}
-              reduced={reduced}
-            />
-          ))}
-        </div>
-
-        <p className="text-[10px] font-mono text-tertiary mt-4">
-          Select any workstream to expand deliverables and expected returns.
-        </p>
+        </SectionReveal>
       </div>
     </section>
   )

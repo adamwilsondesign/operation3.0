@@ -7,7 +7,7 @@
   --accent-2-rgb: 66 0 255;
   --grid-size: 80px;
   --grid-color: rgba(255, 0, 197, 0.035);
-  --nav-h: 56px;
+  --sidebar-w: 240px;
 }
 
 @layer base {
@@ -66,11 +66,14 @@
     min-height: 100svh;
     overflow: visible;
     position: relative;
-    /* grid on every section */
     background-image:
-      linear-gradient(to right,  var(--grid-color) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-    background-size: var(--grid-size) var(--grid-size);
+      /* Coarse grid every 320px */
+      linear-gradient(to right,  rgba(255,0,197,0.10) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,0,197,0.10) 1px, transparent 1px),
+      /* Fine grid every 80px */
+      linear-gradient(to right,  rgba(255,0,197,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,0,197,0.04) 1px, transparent 1px);
+    background-size: 320px 320px, 320px 320px, 80px 80px, 80px 80px;
   }
 
   @media (min-width: 1024px) {
@@ -88,9 +91,9 @@
     }
   }
 
-  /* Scrollable snap sections — push content below fixed nav */
+  /* Scrollable snap sections */
   .snap-section-inner {
-    padding-top: calc(var(--nav-h) + 1.5rem);
+    padding-top: 2.5rem;
     padding-bottom: 2rem;
   }
 
