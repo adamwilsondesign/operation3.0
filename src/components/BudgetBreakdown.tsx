@@ -142,7 +142,7 @@ export default function BudgetBreakdown() {
       <CornerMarks />
       <div className="section-container snap-section-inner min-h-full flex flex-col justify-center">
         <SectionReveal>
-          <p className="font-mono text-[9px] text-tertiary tracking-[0.2em] uppercase mb-4">// INVESTMENT.BREAKDOWN</p>
+          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-4">// INVEST.001 · BUDGET_BREAKDOWN · TOTAL={new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(totalBudget)}</p>
         </SectionReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-8 lg:gap-12 items-start">

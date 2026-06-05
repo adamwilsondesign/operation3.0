@@ -30,6 +30,7 @@ export default function ProblemSection() {
 
         {/* Header */}
         <SectionReveal>
+          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2">// GAP.ANALYSIS · STATE_COMPARISON</p>
           <p className="eyebrow mb-5">The Gap</p>
         </SectionReveal>
 
@@ -91,7 +92,8 @@ export default function ProblemSection() {
                 bg-surface-2
               "
             >
-              <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-secondary mb-8">
+              <p className="font-mono text-[8px] tracking-[0.2em] uppercase text-accent-2/40 mb-1">[STATE_A]</p>
+              <p className="text-[10px] font-mono font-semibold tracking-[0.18em] uppercase text-secondary mb-8">
                 Current State
               </p>
               <ul className="space-y-2.5" role="list">
@@ -196,7 +198,8 @@ export default function ProblemSection() {
                 bg-surface-2
               "
             >
-              <p className="text-[10px] font-semibold tracking-[0.22em] uppercase text-accent mb-8">
+              <p className="font-mono text-[8px] tracking-[0.2em] uppercase text-accent/40 mb-1">[STATE_B]</p>
+              <p className="text-[10px] font-mono font-semibold tracking-[0.18em] uppercase text-accent mb-8">
                 Target State
               </p>
               <ul className="space-y-2.5" role="list">

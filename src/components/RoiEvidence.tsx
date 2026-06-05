@@ -184,6 +184,7 @@ export default function RoiEvidence({ onRefClick }: Props) {
       <div className="section-container mb-5">
 
         <SectionReveal>
+          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2">// ROI.EVIDENCE · EXTERNAL_RESEARCH</p>
           <p className="eyebrow mb-5">The Business Case</p>
         </SectionReveal>
 

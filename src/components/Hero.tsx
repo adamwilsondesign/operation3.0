@@ -96,9 +96,14 @@ export default function Hero() {
           <svg viewBox="0 0 56 62" className="h-8 w-auto flex-shrink-0" fill="none" aria-label="Lazer logo mark">
             <polygon points="14,1 42,1 56,61 0,61" fill="#FF00C5"/>
           </svg>
-          <span className="text-eyebrow font-semibold tracking-wide uppercase text-tertiary">
-            Executive Proposal — {new Date().getFullYear()}
-          </span>
+          <div className="flex flex-col gap-1">
+            <span className="text-eyebrow font-semibold tracking-wide uppercase text-tertiary">
+              Executive Proposal — {new Date().getFullYear()}
+            </span>
+            <span className="font-mono text-[8px] tracking-[0.18em] text-accent-2/50 uppercase">
+              // DOC-001 · BRAND.EVOLUTION · SALES.ENABLEMENT
+            </span>
+          </div>
         </motion.div>
 
         {/* Headline */}
@@ -123,6 +128,14 @@ export default function Hero() {
         </motion.p>
 
         {/* Chips */}
+        <motion.p
+          initial={reduced ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
+          className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2"
+        >
+          // KEY_METRICS · ENGAGEMENT_SUMMARY
+        </motion.p>
         <motion.div
           initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}

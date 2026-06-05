@@ -110,11 +110,11 @@ function DecisionCard({
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 mb-2">
             <span className={`
-              text-[9px] font-semibold tracking-[0.2em] uppercase leading-none
-              px-1.5 py-0.5 rounded-[2px] border
+              font-mono text-[8px] font-semibold tracking-[0.18em] uppercase leading-none
+              px-1.5 py-0.5 rounded-[1px] border
               ${isDeprioritized
-                ? 'border-border text-tertiary'
-                : 'border-accent/25 text-accent/70'
+                ? 'border-border/60 text-tertiary'
+                : 'border-accent-2/25 text-accent-2/70'
               }
             `}>
               {item.category}
@@ -177,6 +177,7 @@ export default function ExecutiveAsk() {
 
         {/* Header */}
         <SectionReveal>
+          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2">// EXEC.ASK · DECISION_MATRIX · ITEMS=9</p>
           <p className="eyebrow mb-5">The Ask</p>
         </SectionReveal>
 

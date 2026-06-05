@@ -222,6 +222,7 @@ export default function PaybackLogic() {
 
         {/* Header */}
         <SectionReveal>
+          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2">// ROI.CALC · INTERACTIVE_MODEL · INVESTMENT={new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(INVESTMENT)}</p>
           <p className="eyebrow mb-3">Payback Logic</p>
         </SectionReveal>
 

@@ -109,6 +109,7 @@ export default function Timeline() {
 
         {/* Header */}
         <SectionReveal>
+          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2">// SCHED.001 · DELIVERY_PLAN · WEEKS=10</p>
           <p className="eyebrow mb-3">Timeline</p>
         </SectionReveal>
 
