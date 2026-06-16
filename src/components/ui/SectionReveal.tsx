@@ -12,9 +12,11 @@ interface SectionRevealProps {
   distance?: number
 }
 
+const EASE = [0.16, 1, 0.3, 1] as const
+
 const containerVariants: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
+  visible: { transition: { staggerChildren: 0.07 } },
 }
 
 const itemVariants = (distance: number): Variants => ({
@@ -22,7 +24,7 @@ const itemVariants = (distance: number): Variants => ({
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.5, ease: EASE },
   },
 })
 
@@ -39,7 +41,7 @@ const itemVariants = (distance: number): Variants => ({
  *     <div>...</div>
  *   </SectionReveal>
  */
-export function SectionReveal({ children, className = '', delay = 0, distance = 20 }: SectionRevealProps) {
+export function SectionReveal({ children, className = '', delay = 0, distance = 14 }: SectionRevealProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-8%' })
   const prefersReducedMotion = useReducedMotion()
@@ -50,7 +52,7 @@ export function SectionReveal({ children, className = '', delay = 0, distance = 
       className={className}
       initial={prefersReducedMotion ? false : { opacity: 0, y: distance }}
       animate={prefersReducedMotion ? {} : (isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: distance })}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, delay, ease: EASE }}
     >
       {children}
     </motion.div>
@@ -81,7 +83,7 @@ export function StaggerReveal({ children, className = '' }: { children: ReactNod
 /**
  * Individual child inside a <StaggerReveal>.
  */
-export function RevealItem({ children, className = '', distance = 20 }: { children: ReactNode; className?: string; distance?: number }) {
+export function RevealItem({ children, className = '', distance = 14 }: { children: ReactNode; className?: string; distance?: number }) {
   const prefersReducedMotion = useReducedMotion()
 
   return (
