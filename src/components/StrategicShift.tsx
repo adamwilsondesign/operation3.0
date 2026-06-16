@@ -44,21 +44,14 @@ export default function StrategicShift() {
             <SectionReveal delay={0.26}>
               <div>
                 <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/60 uppercase mb-3">// STRATEGIC_FOCUS · PRIMARY_VERTICALS</p>
-                <div className="flex flex-wrap items-center gap-2 mb-2">
+                <div className="flex flex-wrap items-center gap-2">
                   {marketShift.focus.map((f, i) => (
                     <span key={f} className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono font-semibold tracking-[0.08em] uppercase border border-accent/40 text-accent rounded-[3px] bg-accent-dim">
-                      <span className="font-mono text-[8px] opacity-50">0{i+1}</span>
+                      <span className="font-mono text-[8px] opacity-50">{String(i+1).padStart(2,'0')}</span>
                       {f}
                     </span>
                   ))}
-                  <span className="flex items-center gap-1.5 px-3 py-1.5 text-[11px] font-mono font-semibold tracking-[0.08em] uppercase border border-accent-2/30 text-accent-2 rounded-[3px] bg-accent-2-dim">
-                    <span className="font-mono text-[8px] opacity-50">SUP</span>
-                    Fintech
-                  </span>
                 </div>
-                <p className="text-[11px] text-tertiary leading-relaxed max-w-[38ch]">
-                  Fintech supports the AI sales story. Crypto/Web3 is deprioritized.
-                </p>
               </div>
             </SectionReveal>
           </div>

@@ -96,6 +96,7 @@ export interface BudgetBucket {
   description: string
   includes: string[]
   returns: string
+  roi: { breakeven: string; annualReturn: string; note: string }
 }
 
 export interface TimelinePhase {
@@ -152,12 +153,12 @@ export const projectMeta: ProjectMeta = {
     'Lazer already has the ingredients: AI capability, design credibility, commerce experience, founder-led trust, strong proof, and enterprise-relevant work. The opportunity now is to package that value into a sharper system that helps the market understand, trust, and buy Lazer faster.',
   primaryMessage:
     'An integrated brand, website, proof, and sales enablement system designed to make Lazer easier to understand, easier to trust, and easier to buy.',
-  investmentUSD: 60000,
-  timelineMonths: 2.5,
+  investmentUSD: 80000,
+  timelineMonths: 3,
   primaryBuyer: 'Enterprise teams trying to ship AI into production.',
-  strategicFocus: ['AI', 'Commerce', 'Design'],
+  strategicFocus: ['AI', 'Commerce', 'Design', 'Fintech'],
   clarifications: [
-    'Fintech supports the AI sales story.',
+    'Fintech is a primary vertical.',
     'Crypto/Web3 is deprioritized.',
     'Logo stays.',
     'Everything else in the brand system evolves.',
@@ -167,13 +168,13 @@ export const projectMeta: ProjectMeta = {
 // ─── Hero Chips ───────────────────────────────────────────────────────────────
 
 export const heroChips: HeroChip[] = [
-  { kind: 'stat', value: '$60K',   label: 'USD total investment' },
-  { kind: 'stat', value: '2.5 mo', label: 'end-to-end delivery' },
-  { kind: 'stat', value: '20+',    label: 'case studies' },
-  { kind: 'stat', value: '5',      label: 'core focus decks' },
-  { kind: 'stat', value: '12',     label: 'service one-pagers' },
-  { kind: 'tag',  text: 'Full Webflow rebuild' },
-  { kind: 'tag',  text: 'Brand evolution' },
+  { kind: 'stat', value: '$80K',  label: 'Total investment' },
+  { kind: 'stat', value: '3mo',   label: 'End-to-end delivery' },
+  { kind: 'stat', value: '25+',   label: 'Cross-LOB case studies' },
+  { kind: 'tag',  text: 'Agentic deck builder' },
+  { kind: 'tag',  text: 'All core focus decks' },
+  { kind: 'tag',  text: 'Full website redesign & build' },
+  { kind: 'tag',  text: 'Lazer brand & content evolution' },
 ]
 
 // ─── Market Shift ─────────────────────────────────────────────────────────────
@@ -185,9 +186,9 @@ export const marketShift: MarketShift = {
     'AI demand is no longer speculative. Companies are using AI, but most have not scaled it. Lazer\'s opportunity is to become the partner that helps enterprise teams move from AI ambition to shipped products, workflows, and platforms.',
   positioning:
     'Lazer is the AI-native product, design, and engineering partner for companies ready to move from ambition to production.',
-  focus: ['AI', 'Commerce', 'Design'],
+  focus: ['AI / Automation', 'Commerce', 'Design Systems', 'Fintech'],
   focusNote:
-    'Fintech supports the AI sales story · Crypto / Web3 deprioritized · Anything outside AI, Commerce, and Design is cut from core market emphasis.',
+    'Four primary verticals · Crypto / Web3 deprioritized · Focus on enterprise teams shipping AI into production.',
 }
 
 export const marketEvidence: MarketEvidence[] = [
@@ -653,152 +654,142 @@ export const scopeItems: ScopeItem[] = [
 
 export const budgetBuckets: BudgetBucket[] = [
   {
-    id: 'web-design',
-    label: 'Web Design & Development',
-    amount: 25000,
-    description: 'Full Webflow rebuild — IA, UX, visual design, development, CMS, QA, and launch.',
+    id: 'website',
+    label: 'Website Design & Build',
+    amount: 45000,
+    description: 'Full Webflow redesign and rebuild — IA, UX, visual design, development, CMS, QA, and launch.',
     includes: [
       'Full Webflow rebuild',
-      'UX/UI design',
+      'UX/UI design system',
       'Responsive design',
       'CMS templates',
       'Performance optimization',
-      'Launch QA',
-      'Conversion paths for "message us" and "request a deck"',
+      'Conversion path design',
+      'Analytics & measurement setup',
     ],
-    returns: 'Turns the website into a sharper buyer education, credibility, and conversion engine.',
+    returns: 'Turns the website into a buyer education, credibility, and conversion engine that works 24/7.',
+    roi: {
+      breakeven: 'Q2 2026',
+      annualReturn: '$200,000+',
+      note: 'One incremental deal at $500K avg × 40% margin = $200K contribution — covers 4.4× of this line alone.',
+    },
   },
   {
-    id: 'web-copy',
+    id: 'copy',
     label: 'Web Copy & Case Studies',
-    amount: 10000,
-    description: '20+ case studies, homepage and service copy, and SEO foundations.',
+    amount: 15000,
+    description: '25+ cross-LOB case studies, homepage and service copy, and proof library.',
     includes: [
-      'Website copy',
+      'Website copywriting',
+      '25+ cross-LOB case studies',
       'Service-line messaging',
-      'Proof hierarchy',
-      'Case study system',
-      '20+ refreshed or rebuilt case studies',
+      'Sales enablement copy',
+      'Proof library',
     ],
-    returns: 'Makes Lazer\'s value easier to understand, lowers buyer uncertainty, and gives sales stronger proof.',
+    returns: 'Shortens sales cycles by giving buyers evidence at every objection point before sales gets involved.',
+    roi: {
+      breakeven: 'Q1 2026',
+      annualReturn: '$150,000+',
+      note: 'Case studies improve close rate — even 1 extra close per quarter pays back 10× this investment.',
+    },
   },
   {
     id: 'branding',
-    label: 'Branding',
-    amount: 20000,
-    description: 'Brand evolution, design system, guidelines, and asset library.',
+    label: 'Branding Update',
+    amount: 5000,
+    description: 'Brand evolution, refreshed guidelines, and asset library.',
     includes: [
-      'Brand evolution around the existing logo',
-      'Visual identity system',
-      'Typography, color, layout, and graphic language',
-      'Line-of-business visual expressions',
-      'Brand guidelines',
-      'Messaging guidelines',
+      'Brand guidelines refresh',
+      'Visual identity refinement',
+      'Asset library',
+      'Usage standards',
     ],
-    returns: 'Improves enterprise perception, creates consistency across every touchpoint, and gives the company a scalable creative system.',
+    returns: 'Coherent brand presence across every buyer touchpoint — website, decks, social, and outreach.',
+    roi: {
+      breakeven: 'Month 1',
+      annualReturn: '$50,000+',
+      note: 'Brand credibility directly impacts perceived value and contract size. Most immediate lever.',
+    },
   },
   {
-    id: 'decks',
-    label: 'Deck Templates',
-    amount: 5000,
-    description: 'Master modular deck, 5 focus-area decks, pitch/proposal/SOW templates, and one-pagers.',
+    id: 'deck-builder',
+    label: 'Agentic Deck Builder',
+    amount: 15000,
+    description: 'AI-powered proposal tool, all core focus decks, and template system.',
     includes: [
-      'General Lazer, AI, Fintech, Commerce, and Design decks',
+      'AI-powered proposal generation tool',
+      'All core focus decks (AI, Commerce, Design, Fintech)',
       'Master modular deck template',
-      'Pitch, proposal, discovery, and SOW templates',
-      'Reusable slide components',
+      'Pitch, proposal & SOW templates',
+      'Sales team onboarding',
     ],
-    returns: 'Gives founders, salespeople, and partners a faster, sharper, more consistent way to sell.',
+    returns: 'Eliminates custom deck time — reps send polished proposals in minutes, not days.',
+    roi: {
+      breakeven: 'Month 2',
+      annualReturn: '$120,000+',
+      note: 'Saves ~8hrs/proposal × 30 proposals/year × $500/hr blended cost = $120K in recovered capacity.',
+    },
   },
 ]
 
-export const totalBudget: number = budgetBuckets.reduce((sum, b) => sum + b.amount, 0)
+export const totalBudget = 80000
 
 // ─── Timeline ─────────────────────────────────────────────────────────────────
 
 export const timelinePhases: TimelinePhase[] = [
   {
-    phase: 'Phase 1',
-    label: 'Strategy & Audit',
+    phase: 'Phase 01',
+    label: 'Discovery & Brand',
     duration: 'Weeks 1–2',
     weekStart: 1,
     weekEnd: 2,
-    deliverables: [
-      'Stakeholder interviews',
-      'Competitive audit',
-      'Positioning brief',
-      'Information architecture',
-    ],
-    milestones: ['Positioning sign-off — Week 2'],
+    deliverables: ['Brand audit', 'Stakeholder workshops', 'Brand direction', 'Content strategy'],
+    milestones: ['Week 2'],
   },
   {
-    phase: 'Phase 2',
-    label: 'Brand System',
-    duration: 'Weeks 2–5',
-    weekStart: 2,
-    weekEnd: 5,
-    deliverables: [
-      'Identity concepts',
-      'Design system & tokens',
-      'Brand guidelines',
-      'Asset library',
-    ],
-    milestones: ['Brand direction approval — Week 4'],
-  },
-  {
-    phase: 'Phase 3',
-    label: 'Website Design & Build',
-    duration: 'Weeks 3–8',
+    phase: 'Phase 02',
+    label: 'Website Design',
+    duration: 'Weeks 3–4',
     weekStart: 3,
-    weekEnd: 8,
-    deliverables: [
-      'UX wireframes',
-      'Visual design',
-      'Webflow development',
-      '20+ case studies',
-    ],
-    milestones: ['Design review — Week 5', 'Content freeze — Week 7'],
+    weekEnd: 4,
+    deliverables: ['UX wireframes', 'Visual design', 'Design system', 'Page templates'],
+    milestones: ['Week 4'],
   },
   {
-    phase: 'Phase 4',
-    label: 'Sales Enablement',
-    duration: 'Weeks 5–9',
+    phase: 'Phase 03',
+    label: 'Copy & Case Studies',
+    duration: 'Weeks 3–6',
+    weekStart: 3,
+    weekEnd: 6,
+    deliverables: ['Website copy', '25+ case studies', 'Sales enablement copy', 'Proof library'],
+    milestones: ['Week 6'],
+  },
+  {
+    phase: 'Phase 04',
+    label: 'Website Build',
+    duration: 'Weeks 5–8',
     weekStart: 5,
-    weekEnd: 9,
-    deliverables: [
-      '5 focus-area decks',
-      'Master deck template',
-      'Pitch & proposal templates',
-      '~12 service one-pagers',
-    ],
-    milestones: ['Deck review — Week 7'],
+    weekEnd: 8,
+    deliverables: ['Webflow build', 'CMS setup', 'Integrations', 'Performance QA'],
+    milestones: ['Week 8'],
   },
   {
-    phase: 'Phase 5',
-    label: 'Social & Launch Kit',
-    duration: 'Weeks 8–10',
-    weekStart: 8,
+    phase: 'Phase 05',
+    label: 'Agentic Deck Builder',
+    duration: 'Weeks 7–10',
+    weekStart: 7,
     weekEnd: 10,
-    deliverables: [
-      'Social media templates',
-      'Launch announcement assets',
-      'Recruitment & culture assets',
-    ],
-    milestones: [],
+    deliverables: ['AI tool build', 'Core focus decks', 'Template system', 'Sales onboarding'],
+    milestones: ['Week 10'],
   },
   {
-    phase: 'Phase 6',
-    label: 'QA, Measurement & Handoff',
-    duration: 'Weeks 9–10',
-    weekStart: 9,
-    weekEnd: 10,
-    deliverables: [
-      'Full QA pass',
-      'GA4 & conversion tracking',
-      'Dashboard setup',
-      'Team enablement & documentation',
-    ],
-    milestones: ['Founder final review — Week 10'],
+    phase: 'Phase 06',
+    label: 'Launch & Measure',
+    duration: 'Weeks 11–12',
+    weekStart: 11,
+    weekEnd: 12,
+    deliverables: ['QA & testing', 'Launch', 'Analytics setup', 'Measurement framework'],
+    milestones: ['Week 12'],
   },
 ]
 

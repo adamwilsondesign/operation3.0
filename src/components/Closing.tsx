@@ -83,9 +83,15 @@ export default function Closing() {
           <p className="
             text-[15px] text-secondary leading-[1.65]
             text-center mx-auto max-w-[44ch]
-            mb-8
+            mb-4
           ">
             For the next phase of the business, this is not a marketing expense. It is a growth asset.
+          </p>
+        </SectionReveal>
+
+        <SectionReveal delay={0.25}>
+          <p className="font-mono text-[12px] text-accent text-center mb-8 tracking-wide">
+            Break-even in as little as Month 3 · Year 1 return: $400K–$1.2M
           </p>
         </SectionReveal>
 
@@ -119,19 +125,6 @@ export default function Closing() {
             >
               View budget
             </a>
-            <a
-              href="#references"
-              className="
-                inline-flex items-center gap-2
-                border border-border-mid text-secondary
-                text-[12px] font-semibold tracking-[0.1em] uppercase
-                px-6 py-3 rounded-[3px]
-                hover:border-border-light hover:text-primary transition-colors duration-200
-                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-surface
-              "
-            >
-              View references
-            </a>
           </div>
         </SectionReveal>
 
@@ -141,23 +134,29 @@ export default function Closing() {
             <p className="text-[9px] font-semibold tracking-[0.25em] uppercase text-accent/60 mb-6 text-center">
               {projectMeta.title}
             </p>
-            <div className="grid grid-cols-3 divide-x divide-accent/15">
-              <div className="pr-6 lg:pr-8 text-center">
+            <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-accent/15">
+              <div className="pr-4 lg:pr-6 text-center">
                 <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Investment</p>
-                <p className="text-[22px] lg:text-[26px] font-mono font-black text-primary tabular leading-none">
+                <p className="text-[20px] lg:text-[24px] font-mono font-black text-primary tabular leading-none">
                   {fmt(totalBudget)}
                 </p>
               </div>
-              <div className="px-6 lg:px-8 text-center">
+              <div className="px-4 lg:px-6 text-center">
                 <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Timeline</p>
-                <p className="text-[22px] lg:text-[26px] font-mono font-black text-primary tabular leading-none">
+                <p className="text-[20px] lg:text-[24px] font-mono font-black text-primary tabular leading-none">
                   {projectMeta.timelineMonths}mo
                 </p>
               </div>
-              <div className="pl-6 lg:pl-8 text-center">
-                <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Scope</p>
-                <p className="text-[13px] font-semibold text-primary leading-snug">
-                  System V1
+              <div className="px-4 lg:px-6 text-center mt-4 lg:mt-0">
+                <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Break-even</p>
+                <p className="text-[20px] lg:text-[24px] font-mono font-black text-primary tabular leading-none">
+                  Month 3
+                </p>
+              </div>
+              <div className="pl-4 lg:pl-6 text-center mt-4 lg:mt-0">
+                <p className="text-[9px] font-semibold tracking-[0.2em] uppercase text-accent/50 mb-2">Year 1 Return</p>
+                <p className="text-[20px] lg:text-[24px] font-mono font-black text-accent tabular leading-none">
+                  $400K+
                 </p>
               </div>
             </div>

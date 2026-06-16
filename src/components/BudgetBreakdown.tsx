@@ -121,6 +121,19 @@ function BucketRow({ bucket, index, isActive, onSelect }: {
                   <p className="text-[11px] text-secondary leading-[1.5]">{bucket.returns}</p>
                 </div>
               </div>
+              <div className="col-span-2 pt-3 mt-3 border-t border-accent/15 flex items-start gap-6 flex-wrap">
+                <div>
+                  <p className="font-mono text-[8px] tracking-[0.2em] uppercase text-accent/60 mb-1">// BREAK_EVEN</p>
+                  <p className="font-mono text-[13px] font-semibold text-accent">{bucket.roi.breakeven}</p>
+                </div>
+                <div>
+                  <p className="font-mono text-[8px] tracking-[0.2em] uppercase text-accent-2/60 mb-1">// ANNUAL_RETURN</p>
+                  <p className="font-mono text-[13px] font-semibold text-accent-2">{bucket.roi.annualReturn}</p>
+                </div>
+                <div className="flex-1">
+                  <p className="text-[10px] text-tertiary leading-[1.45] italic">{bucket.roi.note}</p>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}
@@ -150,7 +163,7 @@ export default function BudgetBreakdown() {
           <div className="flex flex-col items-center gap-4">
             <SectionReveal>
               <h2 id="budget-headline" className="text-display-md font-black text-primary tracking-editorial leading-editorial max-w-[22ch] mb-4">
-                $60K focused on highest-leverage delivery.
+                $80K focused on highest-leverage delivery.
               </h2>
             </SectionReveal>
             <SectionReveal delay={0.1}>

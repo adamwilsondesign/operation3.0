@@ -191,6 +191,37 @@ export default function RoiEvidence() {
         </SectionReveal>
       </div>
 
+      {/* ── ROI projection panel ── */}
+      <SectionReveal delay={0.18}>
+        <div className="mx-6 lg:mx-8 mb-6 bg-primary rounded-[4px] p-5 lg:p-6">
+          <p className="font-mono text-[8px] tracking-[0.2em] text-white/30 uppercase mb-4">
+            // ROI.PROJECTION · AVG_PROJECT_VALUE=$500K · CONTRIBUTION_MARGIN=40% · YEAR_1_ESTIMATE
+          </p>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-8">
+            <div>
+              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Conservative · Yr 1</p>
+              <p className="font-mono text-[28px] font-black text-accent leading-none tabular">$400K+</p>
+              <p className="font-mono text-[9px] text-white/40 mt-1.5">5× return on $80K</p>
+            </div>
+            <div>
+              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Base · Yr 1</p>
+              <p className="font-mono text-[28px] font-black text-accent leading-none tabular">$750K+</p>
+              <p className="font-mono text-[9px] text-white/40 mt-1.5">9.4× return on $80K</p>
+            </div>
+            <div>
+              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Break-even point</p>
+              <p className="font-mono text-[28px] font-black text-white leading-none tabular">~5mo</p>
+              <p className="font-mono text-[9px] text-white/40 mt-1.5">1 deal at $500K closes</p>
+            </div>
+            <div>
+              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Avg deal value</p>
+              <p className="font-mono text-[28px] font-black text-white leading-none tabular">$500K</p>
+              <p className="font-mono text-[9px] text-white/40 mt-1.5">per engagement</p>
+            </div>
+          </div>
+        </div>
+      </SectionReveal>
+
       {/* ── Card rail ── */}
       <SectionReveal delay={0.2} className="relative">
 

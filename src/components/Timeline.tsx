@@ -4,7 +4,7 @@ import { timelinePhases, approvalModel } from '../data/proposal'
 import { SectionReveal } from './ui'
 import { CornerMarks } from './CornerMarks'
 
-const TOTAL_WEEKS = 10
+const TOTAL_WEEKS = 12
 
 // Subtle per-phase accent tints — all cobalt family, different opacities
 const BAR_STYLES = [
@@ -109,7 +109,7 @@ export default function Timeline() {
 
         {/* Header */}
         <SectionReveal>
-          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2">// SCHED.001 · DELIVERY_PLAN · WEEKS=10</p>
+          <p className="font-mono text-[8px] tracking-[0.2em] text-accent-2/50 uppercase mb-2">// SCHED.001 · DELIVERY_PLAN · WEEKS=12</p>
           <p className="eyebrow mb-3">Timeline</p>
         </SectionReveal>
 
@@ -122,13 +122,13 @@ export default function Timeline() {
               max-w-[28ch] mb-4
             "
           >
-            2.5 months. Parallel workstreams. Milestone approvals.
+            3 months. 6 sprints. Parallel workstreams.
           </h2>
         </SectionReveal>
 
         <SectionReveal delay={0.14}>
           <p className="text-[15px] text-secondary leading-[1.65] max-w-[52ch] mb-6">
-            Six parallel workstreams. Milestone approvals at weeks 2, 4, 5, 7, and 10.
+            Six 2-week sprints. Milestone approvals at weeks 2, 4, 6, 8, 10, and 12.
           </p>
         </SectionReveal>
 
