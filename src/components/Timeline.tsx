@@ -12,8 +12,8 @@ const BAR_STYLES = [
   'bg-accent/80',
   'bg-accent/65',
   'bg-accent/50',
-  'bg-accent/38',
-  'bg-accent/28',
+  'bg-accent/40',
+  'bg-accent/30',
 ]
 
 // ─── Gantt bar ────────────────────────────────────────────────────────────────
