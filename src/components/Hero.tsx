@@ -10,11 +10,11 @@ function StatChip({ value, label, delay, reduced }: { value: string; label: stri
       initial={reduced ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: EASE }}
-      className="flex items-stretch border border-border-mid rounded-[3px] bg-white shadow-card overflow-hidden hover:border-accent/40 hover:shadow-accent-sm transition-all duration-250 group min-h-[44px]"
+      className="flex items-stretch border border-border-mid rounded-[3px] bg-white shadow-card overflow-hidden hover:border-accent/40 hover:shadow-accent-sm transition-all duration-250 group h-[48px]"
     >
-      <span className="px-3 py-2.5 font-mono text-[13px] font-semibold tabular text-primary group-hover:text-accent transition-colors duration-250 whitespace-nowrap flex items-center">{value}</span>
+      <span className="px-3 font-mono text-[13px] font-semibold tabular text-primary group-hover:text-accent transition-colors duration-250 whitespace-nowrap flex items-center">{value}</span>
       <span className="w-[1px] self-stretch bg-border" aria-hidden="true" />
-      <span className="px-3 py-2.5 text-[11px] text-secondary leading-tight max-w-[100px] flex items-center">{label}</span>
+      <span className="px-3 text-[11px] text-secondary leading-tight max-w-[100px] flex items-center">{label}</span>
     </motion.div>
   )
 }
@@ -25,7 +25,7 @@ function TagChip({ text, delay, reduced }: { text: string; delay: number; reduce
       initial={reduced ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay, ease: EASE }}
-      className="flex items-center gap-2 border border-border-mid rounded-[3px] bg-white shadow-card px-3 py-2.5 min-h-[44px] hover:border-accent/40 transition-colors duration-250"
+      className="flex items-center gap-2 border border-border-mid rounded-[3px] bg-white shadow-card px-3 h-[48px] hover:border-accent/40 transition-colors duration-250"
     >
       <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" aria-hidden="true" />
       <span className="text-[11px] text-secondary whitespace-nowrap">{text}</span>
@@ -113,7 +113,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.38, ease: EASE }}
           className="text-[15px] text-secondary leading-[1.6] max-w-[50ch] mb-8"
         >
-          Lazer has the capability, credibility, and proof. The opportunity is to package that value into a system that helps buyers understand, trust, and act faster.
+          Lazer has the capability, credibility, and proof. The opportunity is to package that value into a system that positions Lazer as an enterprise-grade partner and forward-deployed engineering (FDE) specialist — helping buyers understand, trust, and act faster.
         </motion.p>
 
         {/* Chips */}
