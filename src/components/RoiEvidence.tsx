@@ -7,6 +7,58 @@ import { CornerMarks } from './CornerMarks'
 
 const CARD_GAP = 16 // px — matches gap-4
 
+// ─── ROI projection scenarios ───────────────────────────────────────────────
+// Inputs feed the model; returns are the computed outputs.
+const ROI_SCENARIOS = [
+  {
+    id: 'conservative',
+    label: 'Conservative',
+    inputs: {
+      newDeals: '1 new deal',
+      avgDeal: '$500K',
+      margin: '40%',
+      uplift: '5% renewal uplift',
+    },
+    return: {
+      year1: '$400K+',
+      multiple: '5×',
+      breakeven: '~5 months',
+    },
+  },
+  {
+    id: 'base',
+    label: 'Base',
+    inputs: {
+      newDeals: '2 new deals',
+      avgDeal: '$500K',
+      margin: '40%',
+      uplift: '10% renewal uplift',
+    },
+    return: {
+      year1: '$750K+',
+      multiple: '9.4×',
+      breakeven: '~3 months',
+    },
+  },
+  {
+    id: 'optimistic',
+    label: 'Optimistic',
+    inputs: {
+      newDeals: '3+ new deals',
+      avgDeal: '$500K',
+      margin: '40%',
+      uplift: '15% renewal uplift',
+    },
+    return: {
+      year1: '$1.2M+',
+      multiple: '15×',
+      breakeven: '~2 months',
+    },
+  },
+] as const
+
+type RoiScenario = (typeof ROI_SCENARIOS)[number]
+
 const SOURCE_COLORS: Record<string, { bg: string; text: string; border: string }> = {
   'McKinsey & Company': { bg: '#003366', text: '#FFFFFF', border: '#003366' },
   'Gartner':            { bg: '#007932', text: '#FFFFFF', border: '#007932' },
@@ -114,6 +166,117 @@ function EvidenceCard({
   )
 }
 
+// ─── ROI projection panel ─────────────────────────────────────────────────────
+
+function InputItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex flex-col gap-0.5">
+      <span className="font-mono text-[9px] text-white/35 uppercase tracking-wider">{label}</span>
+      <span className="text-[14px] font-semibold text-white/90 leading-tight">{value}</span>
+    </div>
+  )
+}
+
+function ReturnStat({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
+  return (
+    <div className="flex flex-col gap-1">
+      <span className="font-mono text-[9px] text-white/35 uppercase tracking-wider">{label}</span>
+      <span className={`font-mono text-[30px] lg:text-[34px] font-black leading-none tabular ${accent ? 'text-accent' : 'text-white'}`}>
+        {value}
+      </span>
+    </div>
+  )
+}
+
+function RoiProjectionPanel({ reduced }: { reduced: boolean | null }) {
+  const [activeId, setActiveId] = useState<string>('base')
+  const scenario: RoiScenario = ROI_SCENARIOS.find(s => s.id === activeId) ?? ROI_SCENARIOS[1]
+
+  return (
+    <div className="mx-6 lg:mx-8 mb-6 bg-primary rounded-[4px] overflow-hidden">
+      {/* Header + toggle */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-5 lg:p-6 border-b border-white/10">
+        <p className="font-mono text-[8px] tracking-[0.2em] text-white/35 uppercase leading-relaxed">
+          // ROI.PROJECTION · YEAR_1_ESTIMATE
+        </p>
+        {/* Scenario toggle */}
+        <div
+          className="inline-flex items-center p-0.5 rounded-[3px] bg-white/[0.06] border border-white/10 self-start"
+          role="tablist"
+          aria-label="ROI scenario"
+        >
+          {ROI_SCENARIOS.map(s => {
+            const isActive = s.id === activeId
+            return (
+              <button
+                key={s.id}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => setActiveId(s.id)}
+                className={[
+                  'relative px-3.5 py-1.5 font-mono text-[11px] font-semibold tracking-[0.06em] uppercase rounded-[2px] transition-colors duration-200',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/50',
+                  isActive ? 'text-white' : 'text-white/40 hover:text-white/70',
+                ].join(' ')}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="roi-toggle-pill"
+                    className="absolute inset-0 rounded-[2px] bg-accent"
+                    transition={reduced ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 32 }}
+                  />
+                )}
+                <span className="relative z-10">{s.label}</span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Inputs → Return */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_auto_1fr]">
+        {/* INPUTS */}
+        <div className="p-5 lg:p-6">
+          <p className="font-mono text-[9px] tracking-[0.22em] uppercase text-white/30 mb-4 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/30" aria-hidden="true" />
+            Inputs · Assumptions
+          </p>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-5">
+            <InputItem label="New deals / yr" value={scenario.inputs.newDeals} />
+            <InputItem label="Avg deal value" value={scenario.inputs.avgDeal} />
+            <InputItem label="Contribution margin" value={scenario.inputs.margin} />
+            <InputItem label="Account expansion" value={scenario.inputs.uplift} />
+          </div>
+        </div>
+
+        {/* Divider with arrow */}
+        <div className="hidden lg:flex items-center justify-center px-2 border-x border-white/10">
+          <span className="font-mono text-[18px] text-accent" aria-hidden="true">→</span>
+        </div>
+
+        {/* RETURN */}
+        <div className="p-5 lg:p-6 bg-white/[0.03] border-t lg:border-t-0 border-white/10">
+          <p className="font-mono text-[9px] tracking-[0.22em] uppercase text-accent/70 mb-4 flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" aria-hidden="true" />
+            Return · Year 1
+          </p>
+          <div className="flex flex-col gap-5">
+            <ReturnStat label="Projected return" value={scenario.return.year1} accent />
+            <div className="grid grid-cols-2 gap-6 pt-1">
+              <ReturnStat label="Return multiple" value={scenario.return.multiple} accent />
+              <ReturnStat label="Break-even" value={scenario.return.breakeven} />
+            </div>
+          </div>
+          <p className="font-mono text-[9px] text-white/30 mt-5 leading-relaxed">
+            On $80K invested · {scenario.inputs.avgDeal} avg deal × {scenario.inputs.margin} margin
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ─── Main section ─────────────────────────────────────────────────────────────
 
 export default function RoiEvidence() {
@@ -193,33 +356,7 @@ export default function RoiEvidence() {
 
       {/* ── ROI projection panel ── */}
       <SectionReveal delay={0.18}>
-        <div className="mx-6 lg:mx-8 mb-6 bg-primary rounded-[4px] p-5 lg:p-6">
-          <p className="font-mono text-[8px] tracking-[0.2em] text-white/30 uppercase mb-4">
-            // ROI.PROJECTION · AVG_PROJECT_VALUE=$500K · CONTRIBUTION_MARGIN=40% · YEAR_1_ESTIMATE
-          </p>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-8">
-            <div>
-              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Conservative · Yr 1</p>
-              <p className="font-mono text-[28px] font-black text-accent leading-none tabular">$400K+</p>
-              <p className="font-mono text-[9px] text-white/40 mt-1.5">5× return on $80K</p>
-            </div>
-            <div>
-              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Base · Yr 1</p>
-              <p className="font-mono text-[28px] font-black text-accent leading-none tabular">$750K+</p>
-              <p className="font-mono text-[9px] text-white/40 mt-1.5">9.4× return on $80K</p>
-            </div>
-            <div>
-              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Break-even point</p>
-              <p className="font-mono text-[28px] font-black text-white leading-none tabular">~5mo</p>
-              <p className="font-mono text-[9px] text-white/40 mt-1.5">1 deal at $500K closes</p>
-            </div>
-            <div>
-              <p className="font-mono text-[9px] text-white/40 uppercase tracking-wider mb-1.5">Avg deal value</p>
-              <p className="font-mono text-[28px] font-black text-white leading-none tabular">$500K</p>
-              <p className="font-mono text-[9px] text-white/40 mt-1.5">per engagement</p>
-            </div>
-          </div>
-        </div>
+        <RoiProjectionPanel reduced={reduced} />
       </SectionReveal>
 
       {/* ── Card rail ── */}
