@@ -387,6 +387,7 @@ export default function WhatWeAreBuilding() {
   const reduced = useReducedMotion()
   const [activeIdx, setActiveIdx] = useState(0)
   const [progress, setProgress]   = useState(0)
+  const [paused, setPaused]        = useState(false)
 
   const selectNode = useCallback((i: number) => {
     setActiveIdx(i)
@@ -394,7 +395,7 @@ export default function WhatWeAreBuilding() {
   }, [])
 
   useEffect(() => {
-    if (reduced) return
+    if (reduced || paused) return
     const tick = setInterval(() => {
       setProgress(p => {
         if (p >= 100) {
@@ -405,7 +406,7 @@ export default function WhatWeAreBuilding() {
       })
     }, TICK_MS)
     return () => clearInterval(tick)
-  }, [reduced])
+  }, [reduced, paused])
 
   const active = systemNodes[activeIdx]
 
@@ -437,7 +438,11 @@ export default function WhatWeAreBuilding() {
 
         {/* 50/50 layout */}
         <SectionReveal delay={0.15}>
-          <div className="grid grid-cols-1 lg:grid-cols-2 border border-border rounded-[4px] overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+          <div
+            className="grid grid-cols-1 lg:grid-cols-2 border border-border rounded-[4px] overflow-hidden bg-white shadow-[0_4px_20px_rgba(0,0,0,0.06)]"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+          >
 
             {/* LEFT: accordion list */}
             <div className="border-b lg:border-b-0 lg:border-r border-border divide-y divide-border">
