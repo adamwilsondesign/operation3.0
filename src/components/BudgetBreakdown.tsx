@@ -149,7 +149,7 @@ export default function BudgetBreakdown() {
   return (
     <section
       id="budget"
-      className="snap-section snap-section-scroll border-t border-border bg-white"
+      className="snap-section border-t border-border bg-white"
       aria-labelledby="budget-headline"
     >
       <CornerMarks />
@@ -181,9 +181,9 @@ export default function BudgetBreakdown() {
             </SectionReveal>
           </div>
 
-          {/* RIGHT: bucket rows */}
+          {/* RIGHT: bucket rows — fixed height so expansions scroll in-place */}
           <SectionReveal delay={0.2}>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 overflow-y-auto max-h-[480px] no-scrollbar">
               {budgetBuckets.map((b, i) => (
                 <BucketRow
                   key={b.id}
