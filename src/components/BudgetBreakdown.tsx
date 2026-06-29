@@ -163,7 +163,7 @@ export default function BudgetBreakdown() {
           <div className="flex flex-col items-center gap-4">
             <SectionReveal>
               <h2 id="budget-headline" className="text-display-md font-black text-primary tracking-editorial leading-editorial max-w-[22ch] mb-4">
-                $80K focused on highest-leverage delivery.
+                $65K focused on highest-leverage delivery.
               </h2>
             </SectionReveal>
             <SectionReveal delay={0.1}>

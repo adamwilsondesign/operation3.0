@@ -153,7 +153,7 @@ export const projectMeta: ProjectMeta = {
     'Lazer already has the ingredients: AI capability, design credibility, commerce experience, founder-led trust, strong proof, and enterprise-relevant work. The opportunity now is to package that value into a sharper system that helps the market understand, trust, and buy Lazer faster.',
   primaryMessage:
     'An integrated brand, website, proof, and sales enablement system designed to make Lazer easier to understand, easier to trust, and easier to buy.',
-  investmentUSD: 80000,
+  investmentUSD: 65000,
   timelineMonths: 3,
   primaryBuyer: 'Enterprise teams trying to ship AI into production.',
   strategicFocus: ['AI', 'Commerce', 'Design', 'Fintech'],
@@ -168,7 +168,7 @@ export const projectMeta: ProjectMeta = {
 // ─── Hero Chips ───────────────────────────────────────────────────────────────
 
 export const heroChips: HeroChip[] = [
-  { kind: 'stat', value: '$80K',  label: 'Total investment' },
+  { kind: 'stat', value: '$65K',  label: 'Total investment' },
   { kind: 'stat', value: '3mo',   label: 'End-to-end delivery' },
   { kind: 'stat', value: '25+',   label: 'Cross-LOB case studies' },
   { kind: 'tag',  text: 'Agentic deck builder' },
@@ -661,7 +661,7 @@ export const budgetBuckets: BudgetBucket[] = [
   {
     id: 'website',
     label: 'Website Design & Build',
-    amount: 45000,
+    amount: 35000,
     description: 'Full Webflow redesign and rebuild — IA, UX, visual design, development, CMS, QA, and launch.',
     includes: [
       'Full Webflow rebuild',
@@ -676,13 +676,13 @@ export const budgetBuckets: BudgetBucket[] = [
     roi: {
       breakeven: 'Q2 2026',
       annualReturn: '$200,000+',
-      note: 'One incremental deal at $500K avg × 40% margin = $200K contribution — covers 4.4× of this line alone.',
+      note: 'One incremental deal at $500K avg × 40% margin = $200K contribution — covers 5.7× of this line alone.',
     },
   },
   {
     id: 'copy',
     label: 'Web Copy & Case Studies',
-    amount: 15000,
+    amount: 12500,
     description: '25+ cross-LOB case studies, homepage and service copy, and proof library.',
     includes: [
       'Website copywriting',
@@ -719,7 +719,7 @@ export const budgetBuckets: BudgetBucket[] = [
   {
     id: 'deck-builder',
     label: 'Agentic Deck Builder',
-    amount: 15000,
+    amount: 12500,
     description: 'AI-powered proposal tool, all core focus decks, and template system.',
     includes: [
       'AI-powered proposal generation tool',
@@ -737,7 +737,7 @@ export const budgetBuckets: BudgetBucket[] = [
   },
 ]
 
-export const totalBudget = 80000
+export const totalBudget = 65000
 
 // ─── Timeline ─────────────────────────────────────────────────────────────────
 

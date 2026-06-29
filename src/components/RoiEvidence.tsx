@@ -132,7 +132,7 @@ function RoiProjectionPanel({ reduced }: { reduced: boolean | null }) {
     <div className="mx-6 lg:mx-8 mb-4 bg-primary rounded-[4px] overflow-hidden">
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 px-5 py-4 border-b border-white/10">
         <p className="font-mono text-[8px] tracking-[0.2em] text-white/30 uppercase flex-1">
-          // ROI.PROJECTION · $80K INVESTED · YEAR 1 ESTIMATE
+          // ROI.PROJECTION · $65K INVESTED · YEAR 1 ESTIMATE
         </p>
         {/* Scenario toggle */}
         <div
